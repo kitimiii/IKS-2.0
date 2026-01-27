@@ -1,0 +1,109 @@
+.infotextbox-wrapper {
+    position: relative;
+    /* Breite passt sich an oder wird durch Props gesteuert */
+    width: 400px;
+    /* Höhe passt sich an oder wird durch Props gesteuert */
+    height: 400px;
+    z-index: 30;
+    pointer-events: none;
+    /* Flexbox Eigenschaften falls im Container */
+    flex-shrink: 0;
+}
+
+[data-position='left'] .infotextbox-wrapper {
+    /* Keine spezielle Positionierung mehr nötig */
+}
+
+.infotextbox-panel {
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 100%;
+    height: 100%;
+
+    background: white;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+    overflow-y: auto;
+    z-index: 10;
+    pointer-events: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+[data-position='left'] .infotextbox-panel {
+    /* Standard Border-Radius beibehalten */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.itb-prelayers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+[data-position='left'] .itb-prelayers {
+    top: 0;
+    left: 0;
+}
+
+.itb-prelayer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transform: translateX(0);
+    border-radius: 12px;
+}
+
+[data-position='left'] .itb-prelayer {
+    border-radius: 12px;
+}
+
+.itb-panel-inner {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.25rem;
+}
+
+.itb-text-content {
+    /* Font size - customizable */
+    font-size: 1.5em;
+    /* Color - customizable */
+    color: #61554B;
+    /* Font family - Sedan */
+    font-family: 'Sedan', serif;
+    line-height: 1.6;
+    text-align: left;
+    padding: 1em;
+}
+
+@media (max-width: 1024px) {
+    .infotextbox-wrapper {
+        width: 90%;
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 640px) {
+    .infotextbox-wrapper {
+        width: 90%;
+        max-width: 350px;
+    }
+
+    .itb-text-content {
+        font-size: 1.2em;
+    }
+}

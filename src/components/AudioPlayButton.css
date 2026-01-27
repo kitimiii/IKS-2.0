@@ -1,0 +1,35 @@
+.audio-play-button {
+    position: fixed;
+    right: 370px;
+    bottom: 47px;
+    /* Positioniert oberhalb des Docks */
+    transform: none;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: none;
+    border: 1px solid #F9EBD5;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.audio-play-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.audio-play-button:active {
+    transform: scale(0.50);
+}
+
+.audio-play-button svg {
+    transition: transform 0.2s ease;
+}
+
+.audio-play-button:hover svg {
+    transform: scale(1.1);
+}

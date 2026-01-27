@@ -1,0 +1,32 @@
+.model3d-container {
+    /* Default dimensions - customizable via props */
+    width: 400px;
+    height: 400px;
+    /* Positioning */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Touch interaction */
+    touch-action: none;
+    user-select: none;
+    /* Visual styling */
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.model3d-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+    cursor: grab;
+}
+
+.model3d-container canvas:active {
+    cursor: grabbing;
+}
+
+/* Optional: Add a subtle border or shadow */
+.model3d-container--bordered {
+    border: 2px solid rgba(97, 85, 75, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}

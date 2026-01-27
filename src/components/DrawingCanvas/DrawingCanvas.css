@@ -1,0 +1,114 @@
+.drawing-canvas-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+}
+
+/* Anleitung Text */
+.drawing-instruction {
+    font-family: 'Sedan', serif;
+    font-size: 1.3em;
+    color: #61554B;
+    text-align: center;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Canvas Container */
+.canvas-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #F9EBD5;
+    border-radius: 8px;
+    box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    background-color: #ffffff;
+    padding: 10px;
+}
+
+/* Das eigentliche Canvas */
+.drawing-canvas {
+    display: block;
+    border-radius: 4px;
+}
+
+/* Controls Container */
+.canvas-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    width: 100%;
+    position: relative;
+}
+
+/* Pinsel Auswahl */
+.brush-selection {
+    display: flex;
+    gap: 15px;
+}
+
+.brush-button {
+    font-family: 'Sedan', serif;
+    font-size: 1rem;
+    color: #61554B;
+    background-color: transparent;
+    border: 1px solid #F9EBD5;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow:
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.brush-button:hover {
+    background-color: rgba(180, 81, 36, 0.1);
+    border-color: #B45124;
+}
+
+.brush-button.active {
+    background-color: #B45124;
+    color: #F9EBD5;
+    border-color: #B45124;
+}
+
+/* Undo/Redo Buttons */
+.undo-redo-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.control-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: 1px solid #F9EBD5;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #61554B;
+    box-shadow:
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.control-button:hover:not(:disabled) {
+    background-color: rgba(180, 81, 36, 0.1);
+    border-color: #B45124;
+    color: #B45124;
+}
+
+.control-button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.control-button svg {
+    width: 60%;
+    height: 60%;
+}
