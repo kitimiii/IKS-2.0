@@ -228,7 +228,7 @@ function App() {
             isPlaying={isPlaying}
             isVisible={activeItem === 'Maobi' && activeSubItem !== 'practice'}
             // 3D Model settings
-            modelPath="/models/Maobí_Pinsel.gltf"
+            modelPath="/models/Stift_platzhalter/scene.gltf"
             modelContainerWidth={400}
             modelContainerHeight={400}
             baseRotation={[0, 0, 0]}
