@@ -9,9 +9,6 @@ const TheoryPage = ({
     title = 'Federkiel',
     // Info text for the InfotextBox - customizable
     infoText = 'Das ist die .... Werkzeug um die ... Schrift auszuführen',
-    // Audio controls
-    onAudioClick,
-    isPlaying = false,
     // 3D Model settings - all customizable
     modelPath = '/models/Stift_platzhalter/scene.gltf',
     modelContainerWidth = 400,
@@ -43,8 +40,6 @@ const TheoryPage = ({
         <PageWrapper
             pageHint=""
             showHint={false}
-            onAudioClick={onAudioClick}
-            isPlaying={isPlaying}
         >
             {/* H1 Title - positioned top-left like pageHint */}
             <h1 className="theory-page-title">{title}</h1>

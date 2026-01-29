@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import './DrawingCanvas.css';
 import vorlage from '../../assets/nachfahren-vorlage.svg';
+import TrashBraun from '../../assets/Images/TrashBraun.PNG';
 
 // Konfigurierbare Größen - hier kannst du später Werte ändern
 const CONFIG = {
@@ -306,6 +307,22 @@ const DrawingCanvas = () => {
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <polyline points="9 18 15 12 9 6" />
                         </svg>
+                    </button>
+                    <button
+                        className="control-button trash-button"
+                        onClick={() => {
+                            setStrokes([]);
+                            setRedoStack([]);
+                        }}
+                        disabled={strokes.length === 0}
+                        style={{
+                            width: '40px',
+                            height: '40px',
+                            padding: '2px'
+                        }}
+                        title="Alles löschen"
+                    >
+                        <img src={TrashBraun} alt="Löschen" style={{ width: '70px', height: '70px', objectFit: 'contain' }} />
                     </button>
                 </div>
             </div>

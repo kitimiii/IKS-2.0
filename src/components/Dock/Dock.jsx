@@ -60,12 +60,9 @@ function DockItem({ children, className = '', onClick, mouseX, spring, distance,
         return val - rect.x - baseItemSize / 2;
     });
 
-    // Wenn aktiv, bleibt die Größe auf magnification
+    // Berechne die Zielgröße basierend auf Mausdistanz
     const targetSize = useTransform(mouseDistance, [-distance, 0, distance], [baseItemSize, magnification, baseItemSize]);
-
-    // Aktive Items behalten ihre magnification Größe
-    const finalSize = isActive ? magnification : targetSize;
-    const size = useSpring(finalSize, spring);
+    const size = useSpring(targetSize, spring);
 
     // Zeige Sub-Items nur wenn dieses Item aktiv ist und subItems vorhanden sind
     const showSubItems = isActive && subItems && subItems.length > 0;

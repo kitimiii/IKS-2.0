@@ -1,14 +1,10 @@
 import React from 'react';
 import './HeroPage.css';
-import AudioPlayButton from '../components/AudioPlayButton';
 import background from '../assets/background.png';
 
-const HeroPage = ({ onAudioClick, isPlaying }) => {
+const HeroPage = ({ onPlayClick }) => {
     return (
         <div className="hero-page" style={{ backgroundImage: `url(${background})` }}>
-            {/* Audio Play Button */}
-            <AudioPlayButton onClick={onAudioClick} isPlaying={isPlaying} />
-
             {/* Content */}
             <div className="hero-content">
                 <h1 className="hero-title">
@@ -18,6 +14,11 @@ const HeroPage = ({ onAudioClick, isPlaying }) => {
                     Zieh die Kopfhörer an und starte das Audio,<br />
                     um in die Kalligraphie einzutauchen.
                 </p>
+                
+                {/* Play Button */}
+                <button className="hero-play-button" onClick={onPlayClick}>
+                    Start
+                </button>
             </div>
         </div>
     );

@@ -8,16 +8,24 @@ import DrawingCanvas from './components/DrawingCanvas';
 import TheoryPage from './components/TheoryPage';
 import PracticePage from './components/PracticePage';
 
-// React Icons
-import {
-  VscHome,
-  VscArchive,
-  VscAccount,
-  VscSettingsGear,
-  VscSearch,
-  VscLibrary,
-  VscEdit
-} from 'react-icons/vsc';
+// Dock Icon Bilder
+import HausBraun from './assets/Images/HausBraun.PNG';
+import PergamentBraun from './assets/Images/PergamentBraun.PNG';
+import ÜbungBraun from './assets/Images/ÜbungBraun.PNG';
+import FederBraun from './assets/Images/FederBraun.PNG';
+import QalamBraun from './assets/Images/QalamBraun.PNG';
+import MaobiBraun from './assets/Images/MaobiBraun.PNG';
+import PaperBraun from './assets/Images/PaperBraun.PNG';
+import PuzzleBraun from './assets/Images/PuzzleBraun.PNG';
+
+import HausBeige from './assets/Images/HausBeige.PNG';
+import PergamentBeige from './assets/Images/PergamentBeige.PNG';
+import ÜbungBeige from './assets/Images/ÜbungBeige.PNG';
+import FederBeige from './assets/Images/FederBeige.PNG';
+import QalamBeige from './assets/Images/QalamBeige.PNG';
+import MaobiBeige from './assets/Images/MaobiBeige.PNG';
+import PaperBeige from './assets/Images/PaperBeige.PNG';
+import PuzzleBeige from './assets/Images/PuzzleBeige.PNG';
 
 // Bilder für Moderne Kalligrafie
 import quoteImg from './assets/slider-image2/Quote.jpg';
@@ -51,13 +59,8 @@ const moderneKalligrafieItems = [
 function App() {
   const [activeItem, setActiveItem] = useState('Home');
   const [activeSubItem, setActiveSubItem] = useState(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  const handleAudioClick = () => {
-    setIsPlaying(!isPlaying);
-    // Hier kannst du später die Audio-Logik hinzufügen
-    console.log(isPlaying ? 'Audio pausiert' : 'Audio gestartet');
-  };
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedModerneImage, setSelectedModerneImage] = useState(null);
 
   const handleDockItemClick = (label, index) => {
     // For Federkiel, Qualam, Maobi - automatically navigate to Theory sub-page
@@ -93,14 +96,45 @@ function App() {
   };
 
   const dockItems = [
-    { icon: <VscHome size={24} />, label: 'Home' },
-    { icon: <VscArchive size={24} />, label: 'Definition' },
-    { icon: <VscAccount size={24} />, label: 'Grundübung' },
-    { icon: <VscSettingsGear size={24} />, label: 'Federkiel' },
-    { icon: <VscSearch size={24} />, label: 'Qualam' },
-    { icon: <VscLibrary size={24} />, label: 'Maobi' },
-    { icon: <VscEdit size={24} />, label: 'Schriftwandel' },
+    { 
+      icon: <img src={activeItem === 'Home' ? HausBeige : HausBraun} alt="Home" style={{ width: '60px', height: '60px' }} />, 
+      label: 'Home' 
+    },
+    { 
+      icon: <img src={activeItem === 'Definition' ? PergamentBeige : PergamentBraun} alt="Definition" style={{ width: '60px', height: '60px' }} />, 
+      label: 'Definition' 
+    },
+    { 
+      icon: <img src={activeItem === 'Grundübung' ? ÜbungBeige : ÜbungBraun} alt="Grundübung" style={{ width: '60px', height: '60px' }} />, 
+      label: 'Grundübung' 
+    },
+    { 
+      icon: <img src={activeItem === 'Federkiel' ? FederBeige : FederBraun} alt="Federkiel" style={{ width: '60px', height: '60px' }} />, 
+      label: 'Federkiel' 
+    },
+    { 
+      icon: <img src={activeItem === 'Qualam' ? QalamBeige : QalamBraun} alt="Qualam" style={{ width: '60px', height: '60px' }} />, 
+      label: 'Qualam' 
+    },
+    { 
+      icon: <img src={activeItem === 'Maobi' ? MaobiBeige : MaobiBraun} alt="Maobi" style={{ width: '60px', height: '60px' }} />, 
+      label: 'Maobi' 
+    },
+    { 
+      icon: <img src={activeItem === 'Schriftwandel' ? PaperBeige : PaperBraun} alt="Schriftwandel" style={{ width: '60px', height: '60px' }} />, 
+      label: 'Schriftwandel' 
+    },
+    { 
+      icon: <img src={activeItem === 'Puzzle' ? PuzzleBeige : PuzzleBraun} alt="Puzzle" style={{ width: '60px', height: '60px' }} />, 
+      label: 'Puzzle' 
+    },
   ];
+
+  const handlePlayClick = () => {
+    setActiveItem('Definition');
+    setActiveSubItem(null);
+    console.log('Navigiere zur Definition Seite');
+  };
 
   // Render basierend auf aktivem Item
   const renderPage = () => {
@@ -108,8 +142,7 @@ function App() {
       case 'Home':
         return (
           <HeroPage
-            onAudioClick={handleAudioClick}
-            isPlaying={isPlaying}
+            onPlayClick={handlePlayClick}
           />
         );
       case 'Definition':
@@ -117,8 +150,6 @@ function App() {
           <PageWrapper
             pageHint="kleiner Einblick was die Page beinhaltet…"
             showHint={true}
-            onAudioClick={handleAudioClick}
-            isPlaying={isPlaying}
           >
             <div style={{
               height: '600px',
@@ -128,14 +159,89 @@ function App() {
               alignItems: 'center',
               justifyContent: 'center'
             }}>
-              <CircularGallery
-                bend={1}
-                textColor="#61554B"
-                borderRadius={0.07}
-                scrollSpeed={1.2}
-                scrollEase={0.05}
-                font="30px Sedan"
-              />
+              <div 
+                onClick={() => setSelectedImage(true)}
+                style={{ width: '100%', height: '100%', cursor: 'pointer' }}
+              >
+                <CircularGallery
+                  bend={1}
+                  textColor="#61554B"
+                  borderRadius={0.07}
+                  scrollSpeed={1.2}
+                  scrollEase={0.05}
+                  font="30px Sedan"
+                />
+              </div>
+              
+              {selectedImage && (
+                <div 
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: '300px',
+                    height: '400px',
+                    background: 'rgba(249, 235, 213, 0.7)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '40px',
+                    borderRadius: '10px',
+                    boxShadow: '0 10px 40px rgba(0, 0, 0, 0.3)',
+                    zIndex: 1000,
+                    cursor: 'pointer'
+                  }}
+                  onClick={() => setSelectedImage(null)}
+                >
+                  {/* X Button zum Schließen */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedImage(null);
+                    }}
+                    style={{
+                      position: 'absolute',
+                      top: '10px',
+                      right: '10px',
+                      background: '#61554B',
+                      color: '#F9EBD5',
+                      border: 'none',
+                      borderRadius: '50%',
+                      width: '35px',
+                      height: '35px',
+                      fontSize: '1.5em',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontWeight: 'bold',
+                      lineHeight: 1,
+                      transition: 'all 0.2s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.background = '#F9EBD5';
+                      e.target.style.color = '#61554B';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.background = '#61554B';
+                      e.target.style.color = '#F9EBD5';
+                    }}
+                  >
+                    ×
+                  </button>
+                  
+                  <p style={{
+                    fontFamily: 'Sedan, serif',
+                    fontSize: '1.5em',
+                    color: '#61554B',
+                    textAlign: 'center',
+                    margin: 0
+                  }}>
+                    Das ist ein Platzhalter der richtige Text folgt noch
+                  </p>
+                </div>
+              )}
             </div>
           </PageWrapper>
         );
@@ -144,8 +250,6 @@ function App() {
           <PageWrapper
             pageHint=""
             showHint={false}
-            onAudioClick={handleAudioClick}
-            isPlaying={isPlaying}
           >
             <DrawingCanvas />
           </PageWrapper>
@@ -157,8 +261,6 @@ function App() {
               title="Federkiel"
               subtitleText="Nehme den Stift in die Hand und schreibe nun"
               subtitleText2="das Wort in der Federkiel Schrift nach"
-              onAudioClick={handleAudioClick}
-              isPlaying={isPlaying}
             />
           );
         }
@@ -166,8 +268,6 @@ function App() {
           <TheoryPage
             title="Federkiel"
             infoText="Das ist der Federkiel – das traditionelle Werkzeug um die westliche Kalligraphie-Schrift auszuführen."
-            onAudioClick={handleAudioClick}
-            isPlaying={isPlaying}
             isVisible={activeItem === 'Federkiel' && activeSubItem !== 'practice'}
             // 3D Model settings
             modelPath="/models/Stift_platzhalter/scene.gltf"
@@ -186,8 +286,6 @@ function App() {
               title="Qualam"
               subtitleText="Nehme den Stift in die Hand und schreibe nun"
               subtitleText2="das Wort in der Qualam Schrift nach"
-              onAudioClick={handleAudioClick}
-              isPlaying={isPlaying}
             />
           );
         }
@@ -195,8 +293,6 @@ function App() {
           <TheoryPage
             title="Qualam"
             infoText="Das ist der Qualam – das traditionelle Werkzeug um die arabische Kalligraphie-Schrift auszuführen."
-            onAudioClick={handleAudioClick}
-            isPlaying={isPlaying}
             isVisible={activeItem === 'Qualam' && activeSubItem !== 'practice'}
             // 3D Model settings
             modelPath="/models/Stift_platzhalter/scene.gltf"
@@ -215,8 +311,6 @@ function App() {
               title="Maobi"
               subtitleText="Nehme den Stift in die Hand und schreibe nun"
               subtitleText2="das Wort in der Maobi Schrift nach"
-              onAudioClick={handleAudioClick}
-              isPlaying={isPlaying}
             />
           );
         }
@@ -224,8 +318,6 @@ function App() {
           <TheoryPage
             title="Maobi"
             infoText="Das ist der Maobi – das traditionelle Werkzeug um die chinesische Kalligraphie-Schrift auszuführen."
-            onAudioClick={handleAudioClick}
-            isPlaying={isPlaying}
             isVisible={activeItem === 'Maobi' && activeSubItem !== 'practice'}
             // 3D Model settings
             modelPath="/models/Stift_platzhalter/scene.gltf"
@@ -243,8 +335,6 @@ function App() {
             <PageWrapper
               pageHint="Maching Game"
               showHint={true}
-              onAudioClick={handleAudioClick}
-              isPlaying={isPlaying}
             >
               <div>Maching Game Placeholder</div>
             </PageWrapper>
@@ -255,8 +345,6 @@ function App() {
           <PageWrapper
             pageHint="Moderne Kalligraphie"
             showHint={true}
-            onAudioClick={handleAudioClick}
-            isPlaying={isPlaying}
           >
             <div style={{
               height: '600px',
@@ -266,23 +354,116 @@ function App() {
               alignItems: 'center',
               justifyContent: 'center'
             }}>
-              <CircularGallery
-                items={moderneKalligrafieItems}
-                bend={1}
-                textColor="#61554B"
-                borderRadius={0.07}
-                scrollSpeed={1.2}
-                scrollEase={0.05}
-                font="30px Sedan"
-              />
+              <div 
+                onClick={() => setSelectedModerneImage(true)}
+                style={{ width: '100%', height: '100%', cursor: 'pointer' }}
+              >
+                <CircularGallery
+                  items={moderneKalligrafieItems}
+                  bend={1}
+                  textColor="#61554B"
+                  borderRadius={0.07}
+                  scrollSpeed={1.2}
+                  scrollEase={0.05}
+                  font="30px Sedan"
+                />
+              </div>
+              
+              {selectedModerneImage && (
+                <div 
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: '300px',
+                    height: '400px',
+                    background: 'rgba(249, 235, 213, 0.7)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '40px',
+                    borderRadius: '10px',
+                    boxShadow: '0 10px 40px rgba(0, 0, 0, 0.3)',
+                    zIndex: 1000,
+                    cursor: 'pointer'
+                  }}
+                  onClick={() => setSelectedModerneImage(null)}
+                >
+                  {/* X Button zum Schließen */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedModerneImage(null);
+                    }}
+                    style={{
+                      position: 'absolute',
+                      top: '10px',
+                      right: '10px',
+                      background: '#61554B',
+                      color: '#F9EBD5',
+                      border: 'none',
+                      borderRadius: '50%',
+                      width: '35px',
+                      height: '35px',
+                      fontSize: '1.5em',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontWeight: 'bold',
+                      lineHeight: 1,
+                      transition: 'all 0.2s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.background = '#F9EBD5';
+                      e.target.style.color = '#61554B';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.background = '#61554B';
+                      e.target.style.color = '#F9EBD5';
+                    }}
+                  >
+                    ×
+                  </button>
+                  
+                  <p style={{
+                    fontFamily: 'Sedan, serif',
+                    fontSize: '1.5em',
+                    color: '#61554B',
+                    textAlign: 'center',
+                    margin: 0
+                  }}>
+                    Das ist ein Platzhalter der richtige Text folgt noch
+                  </p>
+                </div>
+              )}
+            </div>
+          </PageWrapper>
+        );
+      case 'Puzzle':
+        return (
+          <PageWrapper
+            pageHint="Puzzle"
+            showHint={true}
+          >
+            <div style={{
+              height: '600px',
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '2em',
+              color: '#61554B'
+            }}>
+              Puzzle Seite - In Entwicklung
             </div>
           </PageWrapper>
         );
       default:
         return (
           <HeroPage
-            onAudioClick={handleAudioClick}
-            isPlaying={isPlaying}
+            onPlayClick={handlePlayClick}
           />
         );
     }
@@ -292,17 +473,19 @@ function App() {
     <div className="app">
       {renderPage()}
 
-      {/* Navigation Dock */}
-      <Dock
-        items={dockItems}
-        panelHeight={70}
-        baseItemSize={50}
-        magnification={80}
-        bend={1}
-        activeItem={activeItem}
-        onItemClick={handleDockItemClick}
-        onSubItemClick={handleSubItemClick}
-      />
+      {/* Navigation Dock - nur anzeigen wenn nicht auf der Home Page */}
+      {activeItem !== 'Home' && (
+        <Dock
+          items={dockItems}
+          panelHeight={70}
+          baseItemSize={50}
+          magnification={80}
+          bend={1}
+          activeItem={activeItem}
+          onItemClick={handleDockItemClick}
+          onSubItemClick={handleSubItemClick}
+        />
+      )}
     </div>
   );
 }

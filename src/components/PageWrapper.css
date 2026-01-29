@@ -13,9 +13,10 @@
 .page-hint {
     position: absolute;
     top: 30px;
-    left: 30px;
+    left: 50%;
+    transform: translateX(-50%);
     font-family: 'Sedan', serif;
-    font-size: 1.5em;
+    font-size: 2em;
     color: #61554B;
     max-width: none;
     /* Entfernt die max-width Begrenzung */
@@ -34,4 +35,11 @@
     padding: 40px;
     padding-bottom: 160px;
     /* Mehr Platz für das erhöhte Dock */
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .page-hint {
+        top: 20px;
+    }
 }

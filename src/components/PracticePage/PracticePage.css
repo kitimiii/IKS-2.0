@@ -3,10 +3,11 @@
     /* Position - same as pageHint (top-left) */
     position: absolute;
     top: 30px;
-    left: 30px;
+    left: 50%;
+    transform: translateX(-50%);
     /* Typography */
     font-family: 'Sedan', serif;
-    font-size: 1.5em;
+    font-size: 2em;
     font-weight: 600;
     color: #61554B;
     margin: 0;
@@ -104,10 +105,6 @@
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {
-    .practice-page-title {
-        font-size: 1.3em;
-    }
-
     .practice-canvas-container {
         max-width: 100%;
         overflow-x: auto;
@@ -116,9 +113,7 @@
 
 @media (max-width: 640px) {
     .practice-page-title {
-        font-size: 1.2em;
         top: 20px;
-        left: 20px;
     }
 
     .practice-instruction {

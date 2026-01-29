@@ -3,10 +3,11 @@
     /* Position - same as pageHint (top-left) */
     position: absolute;
     top: 30px;
-    left: 30px;
+    left: 50%;
+    transform: translateX(-50%);
     /* Typography */
     font-family: 'Sedan', serif;
-    font-size: 2.5em;
+    font-size: 2em;
     font-weight: 600;
     color: #61554B;
     margin: 0;
@@ -56,17 +57,11 @@
     .theory-model-container {
         margin-bottom: 2rem;
     }
-
-    .theory-page-title {
-        font-size: 2em;
-    }
 }
 
 @media (max-width: 640px) {
     .theory-page-title {
-        font-size: 1.75em;
         top: 20px;
-        left: 20px;
     }
 
     .theory-model-container {

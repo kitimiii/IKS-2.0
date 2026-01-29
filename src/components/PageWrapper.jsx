@@ -1,14 +1,11 @@
 import React from 'react';
 import './PageWrapper.css';
-import AudioPlayButton from './AudioPlayButton';
 import background from '../assets/background.png';
 
 const PageWrapper = ({
     children,
     pageHint,
-    showHint = true,
-    onAudioClick,
-    isPlaying = false
+    showHint = true
 }) => {
     return (
         <div className="page-wrapper" style={{ backgroundImage: `url(${background})` }}>
@@ -18,9 +15,6 @@ const PageWrapper = ({
                     {pageHint}
                 </div>
             )}
-
-            {/* Audio Play Button */}
-            <AudioPlayButton onClick={onAudioClick} isPlaying={isPlaying} />
 
             {/* Page Content */}
             <div className="page-content">
