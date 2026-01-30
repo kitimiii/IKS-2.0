@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 import PageWrapper from '../PageWrapper';
 import './PracticePage.css';
 import vorlage from '../../assets/nachfahren-vorlage.svg';
+import TrashBraun from '../../assets/Images/TrashBraun.PNG';
 
 // Konfigurierbare Größen - hier kannst du später Werte ändern
 const CONFIG = {
@@ -13,9 +14,9 @@ const CONFIG = {
 
 // Pinsel-Konfiguration (Standard: Feder)
 const BRUSH = {
-    baseSize: 2,
-    minSize: 0.5,
-    maxSize: 4,
+    baseSize: 4,
+    minSize: 1,
+    maxSize: 8,
     pressureSensitivity: 0.8,
 };
 
@@ -114,14 +115,19 @@ const PracticePage = ({
     const calculateBrushSize = (prevPoint, currentPoint) => {
         if (!prevPoint) return BRUSH.baseSize;
 
+        const dx = currentPoint.x - prevPoint.x;
         const dy = currentPoint.y - prevPoint.y;
-        const sensitivity = BRUSH.pressureSensitivity;
-
-        let sizeModifier = dy * 0.05 * sensitivity;
-        let newSize = BRUSH.baseSize + sizeModifier;
-
-        newSize = Math.max(BRUSH.minSize, Math.min(BRUSH.maxSize, newSize));
-
+        
+        // Berechne den Winkel der Bewegung
+        const angle = Math.atan2(dy, dx);
+        
+        // Vertikale Striche (±90°) = dick, Horizontale Striche (0° oder 180°) = dünn
+        // Math.cos gibt 1 bei 0°, 0 bei 90°, -1 bei 180°
+        const horizontalness = Math.abs(Math.cos(angle)); // 1 = horizontal, 0 = vertikal
+        
+        // Interpoliere zwischen minSize (horizontal) und maxSize (vertikal)
+        const newSize = BRUSH.minSize + (BRUSH.maxSize - BRUSH.minSize) * (1 - horizontalness);
+        
         return newSize;
     };
 
@@ -282,6 +288,22 @@ const PracticePage = ({
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <polyline points="9 18 15 12 9 6" />
                             </svg>
+                        </button>
+                        <button
+                            className="practice-control-button practice-trash-button"
+                            onClick={() => {
+                                setStrokes([]);
+                                setRedoStack([]);
+                            }}
+                            disabled={strokes.length === 0}
+                            style={{
+                                width: '40px',
+                                height: '40px',
+                                padding: '2px'
+                            }}
+                            title="Alles löschen"
+                        >
+                            <img src={TrashBraun} alt="Löschen" style={{ width: '70px', height: '70px', objectFit: 'contain' }} />
                         </button>
                     </div>
                 </div>

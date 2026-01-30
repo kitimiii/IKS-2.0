@@ -267,7 +267,16 @@ function App() {
         return (
           <TheoryPage
             title="Federkiel"
-            infoText="Das ist der Federkiel – das traditionelle Werkzeug um die westliche Kalligraphie-Schrift auszuführen."
+            infoContent={
+              <ul>
+                <li>Made from feathers of goose, swan, or turkey</li>
+                <li>Standard writing tool in medieval Europe</li>
+                <li>Tip needed regular trimming to stay sharp</li>
+                <li>Suitable for fine lines and detailed ornamentation</li>
+                <li>Used with ink made from soot or oak galls</li>
+                <li>Important in monasteries and universities for manuscripts and documents.</li>
+              </ul>
+            }
             isVisible={activeItem === 'Federkiel' && activeSubItem !== 'practice'}
             // 3D Model settings
             modelPath="/models/Stift_platzhalter/scene.gltf"
@@ -292,7 +301,17 @@ function App() {
         return (
           <TheoryPage
             title="Qualam"
-            infoText="Das ist der Qualam – das traditionelle Werkzeug um die arabische Kalligraphie-Schrift auszuführen."
+            infoContent={
+              <ul>
+                <li>Traditional reed pen used across the Middle East</li>
+                <li>Especially important in the Islamic world</li>
+                <li>Tip cut at an angle for clear, sharp, angular lines</li>
+                <li>Ideal for geometric writing styles</li>
+                <li>Most important tool in Islamic calligraphy</li>
+                <li>Often used for copying the Quran</li>
+                <li>Script held high cultural and spiritual importance because images were avoided</li>
+              </ul>
+            }
             isVisible={activeItem === 'Qualam' && activeSubItem !== 'practice'}
             // 3D Model settings
             modelPath="/models/Stift_platzhalter/scene.gltf"
@@ -317,7 +336,16 @@ function App() {
         return (
           <TheoryPage
             title="Maobi"
-            infoText="Das ist der Maobi – das traditionelle Werkzeug um die chinesische Kalligraphie-Schrift auszuführen."
+            infoContent={
+              <ul>
+                <li>Traditional brush used in China, Japan, and Korea</li>
+                <li>Handle made of bamboo or wood</li>
+                <li>Tip made from animal hair (e.g., goat, wolf, weasel)</li>
+                <li>Very flexible: creates thick and thin lines in one stroke</li>
+                <li>Used together with ink and an ink stone</li>
+                <li>Calligraphy seen as a major art form and reflection of character</li>
+              </ul>
+            }
             isVisible={activeItem === 'Maobi' && activeSubItem !== 'practice'}
             // 3D Model settings
             modelPath="/models/Stift_platzhalter/scene.gltf"

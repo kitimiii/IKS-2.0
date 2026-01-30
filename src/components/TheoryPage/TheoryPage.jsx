@@ -9,6 +9,8 @@ const TheoryPage = ({
     title = 'Federkiel',
     // Info text for the InfotextBox - customizable
     infoText = 'Das ist die .... Werkzeug um die ... Schrift auszuführen',
+    // Info content for InfotextBox (JSX) - takes precedence over infoText
+    infoContent = null,
     // 3D Model settings - all customizable
     modelPath = '/models/Stift_platzhalter/scene.gltf',
     modelContainerWidth = 400,
@@ -61,6 +63,7 @@ const TheoryPage = ({
                 <InfotextBox
                     isVisible={showInfoBox}
                     infoText={infoText}
+                    infoContent={infoContent}
                     height={infoBoxHeight}
                     width={infoBoxWidth}
                     position="right"

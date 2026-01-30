@@ -10,6 +10,8 @@ export const InfotextBox = ({
     isVisible = false,
     // Customizable text - can be changed later
     infoText = 'Das ist die .... Werkzeug um die ... Schrift auszuführen',
+    // Customizable content (JSX) - takes precedence over infoText
+    infoContent = null,
     // Customizable dimensions - can be changed later
     height = 400,
     width = null // If null, uses default CSS width
@@ -174,7 +176,7 @@ export const InfotextBox = ({
             >
                 <div className="itb-panel-inner">
                     <div className="itb-text-content">
-                        {infoText}
+                        {infoContent || infoText}
                     </div>
                 </div>
             </aside>
