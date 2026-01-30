@@ -8,6 +8,7 @@ import DrawingCanvas from './components/DrawingCanvas';
 import TheoryPage from './components/TheoryPage';
 import PracticePage from './components/PracticePage';
 import CalligrapherTable from './components/CalligrapherTable';
+import CalligraphyGame from './components/CalligraphyGame';
 
 // Dock Icon Bilder
 import HausBraun from './assets/Images/HausBraun.PNG';
@@ -447,20 +448,10 @@ function App() {
       case 'Puzzle':
         return (
           <PageWrapper
-            pageHint="Puzzle"
-            showHint={true}
+            pageHint=""
+            showHint={false}
           >
-            <div style={{
-              height: '600px',
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '2em',
-              color: '#61554B'
-            }}>
-              Puzzle Seite - In Entwicklung
-            </div>
+            <CalligraphyGame />
           </PageWrapper>
         );
       default:
