@@ -6,8 +6,8 @@ import TrashBraun from '../../assets/Images/TrashBraun.PNG';
 
 // Konfigurierbare Größen - hier kannst du später Werte ändern
 const CONFIG = {
-    canvasWidth: 840,        // Canvas Breite
-    canvasHeight: 360,       // Canvas Höhe
+    canvasWidth: 860,        // Canvas Breite (User requested 860px)
+    canvasHeight: 330,       // Canvas Höhe (User requested 330px)
     canvasPadding: 20,       // Abstand um das SVG
     buttonSize: 40,          // Button Größe
 };
@@ -223,9 +223,6 @@ const PracticePage = ({
             onAudioClick={onAudioClick}
             isPlaying={isPlaying}
         >
-            {/* H1 Title - positioned top-left like pageHint */}
-            <h1 className="practice-page-title">{title}</h1>
-
             <div className="practice-canvas-wrapper">
                 {/* Anleitung Text */}
                 <p className="practice-instruction">
@@ -247,7 +244,10 @@ const PracticePage = ({
                         width={CONFIG.canvasWidth}
                         height={CONFIG.canvasHeight}
                         className="practice-canvas"
-                        style={{ cursor: getCursorStyle() }}
+                        style={{
+                            cursor: getCursorStyle(),
+                            touchAction: 'none'
+                        }}
                         onMouseDown={handleMouseDown}
                         onMouseMove={handleMouseMove}
                         onMouseUp={handleMouseUp}

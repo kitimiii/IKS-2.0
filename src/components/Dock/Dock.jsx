@@ -26,7 +26,10 @@ const subItemsConfig = {
 };
 
 function DockSubItem({ text, onClick, baseItemSize, isActive }) {
-    const subItemSize = baseItemSize / 2;
+    // ÄNDERN SIE DIESEN WERT, UM DIE GRÖSSE DER SUB-ITEMS ZU ÄNDERN
+    // 0.5 bedeutet die Hälfte der Dock-Item-Größe. 0.8 wäre 80%, etc.
+    const SUB_ITEM_SCALE = 0.9;
+    const subItemSize = baseItemSize * SUB_ITEM_SCALE;
 
     return (
         <motion.div
@@ -48,7 +51,7 @@ function DockSubItem({ text, onClick, baseItemSize, isActive }) {
     );
 }
 
-function DockItem({ children, className = '', onClick, mouseX, spring, distance, magnification, baseItemSize, isActive, subItems, activeItem, onSubItemClick, activeSubItem }) {
+function DockItem({ children, className = '', onClick, mouseX, spring, distance, magnification, baseItemSize, isActive, subItems, activeItem, onSubItemClick, activeSubItem, label }) {
     const ref = useRef(null);
     const isHovered = useMotionValue(0);
 
@@ -61,7 +64,9 @@ function DockItem({ children, className = '', onClick, mouseX, spring, distance,
     });
 
     // Berechne die Zielgröße basierend auf Mausdistanz
-    const targetSize = useTransform(mouseDistance, [-distance, 0, distance], [baseItemSize, magnification, baseItemSize]);
+    // HOME ITEM RESET: Wenn label 'Home' ist, wird keine Vergrößerung angewendet
+    const isHome = label === 'Home';
+    const targetSize = useTransform(mouseDistance, [-distance, 0, distance], [baseItemSize, isHome ? baseItemSize : magnification, baseItemSize]);
     const size = useSpring(targetSize, spring);
 
     // Zeige Sub-Items nur wenn dieses Item aktiv ist und subItems vorhanden sind
@@ -233,6 +238,7 @@ export default function Dock({
                         activeItem={activeItem}
                         activeSubItem={activeSubItem}
                         onSubItemClick={onSubItemClick}
+                        label={item.label}
                     >
                         <DockIcon isActive={activeItem === item.label}>{item.icon}</DockIcon>
                         <DockLabel>{item.label}</DockLabel>
