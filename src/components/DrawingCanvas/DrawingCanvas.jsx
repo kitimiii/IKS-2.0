@@ -5,8 +5,8 @@ import TrashBraun from '../../assets/Images/TrashBraun.PNG';
 
 // Konfigurierbare Größen - hier kannst du später Werte ändern
 const CONFIG = {
-    canvasWidth: 800,        // Canvas Breite
-    canvasHeight: 320,       // Canvas Höhe
+    canvasWidth: 860,        // Canvas Breite (User requested 860px)
+    canvasHeight: 330,       // Canvas Höhe (User requested 330px)
     canvasPadding: 20,       // Abstand um das SVG
     buttonSize: 40,          // Button Größe
     brushButtonWidth: 100,   // Pinsel-Button Breite
@@ -241,7 +241,10 @@ const DrawingCanvas = () => {
                     width={CONFIG.canvasWidth}
                     height={CONFIG.canvasHeight}
                     className="drawing-canvas"
-                    style={{ cursor: getCursorStyle() }}
+                    style={{
+                        cursor: getCursorStyle(),
+                        touchAction: 'none' // Disable browser handling of gestures
+                    }}
                     onMouseDown={handleMouseDown}
                     onMouseMove={handleMouseMove}
                     onMouseUp={handleMouseUp}

@@ -141,7 +141,7 @@ class Media {
         this.font = font;
         this.createShader();
         this.createMesh();
-        this.createTitle();
+        // this.createTitle(); // Text rendering disabled as per user request
         this.onResize();
     }
     createShader() {

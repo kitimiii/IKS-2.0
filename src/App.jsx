@@ -7,6 +7,7 @@ import CircularGallery from './components/CircularGallery';
 import DrawingCanvas from './components/DrawingCanvas';
 import TheoryPage from './components/TheoryPage';
 import PracticePage from './components/PracticePage';
+import CalligrapherTable from './components/CalligrapherTable';
 
 // Dock Icon Bilder
 import HausBraun from './assets/Images/HausBraun.PNG';
@@ -96,37 +97,37 @@ function App() {
   };
 
   const dockItems = [
-    { 
-      icon: <img src={activeItem === 'Home' ? HausBeige : HausBraun} alt="Home" style={{ width: '60px', height: '60px' }} />, 
-      label: 'Home' 
+    {
+      icon: <img src={activeItem === 'Home' ? HausBeige : HausBraun} alt="Home" style={{ width: '60px', height: '60px' }} />,
+      label: 'Home'
     },
-    { 
-      icon: <img src={activeItem === 'Definition' ? PergamentBeige : PergamentBraun} alt="Definition" style={{ width: '60px', height: '60px' }} />, 
-      label: 'Definition' 
+    {
+      icon: <img src={activeItem === 'Definition' ? PergamentBeige : PergamentBraun} alt="Definition" style={{ width: '60px', height: '60px' }} />,
+      label: 'Definition'
     },
-    { 
-      icon: <img src={activeItem === 'Grundübung' ? ÜbungBeige : ÜbungBraun} alt="Grundübung" style={{ width: '60px', height: '60px' }} />, 
-      label: 'Grundübung' 
+    {
+      icon: <img src={activeItem === 'Grundübung' ? ÜbungBeige : ÜbungBraun} alt="Grundübung" style={{ width: '60px', height: '60px' }} />,
+      label: 'Grundübung'
     },
-    { 
-      icon: <img src={activeItem === 'Federkiel' ? FederBeige : FederBraun} alt="Federkiel" style={{ width: '60px', height: '60px' }} />, 
-      label: 'Federkiel' 
+    {
+      icon: <img src={activeItem === 'Federkiel' ? FederBeige : FederBraun} alt="Federkiel" style={{ width: '60px', height: '60px' }} />,
+      label: 'Federkiel'
     },
-    { 
-      icon: <img src={activeItem === 'Qualam' ? QalamBeige : QalamBraun} alt="Qualam" style={{ width: '60px', height: '60px' }} />, 
-      label: 'Qualam' 
+    {
+      icon: <img src={activeItem === 'Qualam' ? QalamBeige : QalamBraun} alt="Qualam" style={{ width: '60px', height: '60px' }} />,
+      label: 'Qualam'
     },
-    { 
-      icon: <img src={activeItem === 'Maobi' ? MaobiBeige : MaobiBraun} alt="Maobi" style={{ width: '60px', height: '60px' }} />, 
-      label: 'Maobi' 
+    {
+      icon: <img src={activeItem === 'Maobi' ? MaobiBeige : MaobiBraun} alt="Maobi" style={{ width: '60px', height: '60px' }} />,
+      label: 'Maobi'
     },
-    { 
-      icon: <img src={activeItem === 'Schriftwandel' ? PaperBeige : PaperBraun} alt="Schriftwandel" style={{ width: '60px', height: '60px' }} />, 
-      label: 'Schriftwandel' 
+    {
+      icon: <img src={activeItem === 'Schriftwandel' ? PaperBeige : PaperBraun} alt="Schriftwandel" style={{ width: '60px', height: '60px' }} />,
+      label: 'Schriftwandel'
     },
-    { 
-      icon: <img src={activeItem === 'Puzzle' ? PuzzleBeige : PuzzleBraun} alt="Puzzle" style={{ width: '60px', height: '60px' }} />, 
-      label: 'Puzzle' 
+    {
+      icon: <img src={activeItem === 'Puzzle' ? PuzzleBeige : PuzzleBraun} alt="Puzzle" style={{ width: '60px', height: '60px' }} />,
+      label: 'Puzzle'
     },
   ];
 
@@ -157,9 +158,10 @@ function App() {
               position: 'relative',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              transform: 'translateY(-40px)' // Moved up to avoid Dock collision
             }}>
-              <div 
+              <div
                 onClick={() => setSelectedImage(true)}
                 style={{ width: '100%', height: '100%', cursor: 'pointer' }}
               >
@@ -172,9 +174,9 @@ function App() {
                   font="30px Sedan"
                 />
               </div>
-              
+
               {selectedImage && (
-                <div 
+                <div
                   style={{
                     position: 'absolute',
                     top: '50%',
@@ -230,7 +232,7 @@ function App() {
                   >
                     ×
                   </button>
-                  
+
                   <p style={{
                     fontFamily: 'Sedan, serif',
                     fontSize: '1.5em',
@@ -333,10 +335,10 @@ function App() {
         if (activeSubItem === 'machingGame') {
           return (
             <PageWrapper
-              pageHint="Maching Game"
+              pageHint="Der Kalligraf"
               showHint={true}
             >
-              <div>Maching Game Placeholder</div>
+              <CalligrapherTable />
             </PageWrapper>
           );
         }
@@ -352,9 +354,10 @@ function App() {
               position: 'relative',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              transform: 'translateY(-40px)' // Moved up to avoid Dock collision
             }}>
-              <div 
+              <div
                 onClick={() => setSelectedModerneImage(true)}
                 style={{ width: '100%', height: '100%', cursor: 'pointer' }}
               >
@@ -368,9 +371,9 @@ function App() {
                   font="30px Sedan"
                 />
               </div>
-              
+
               {selectedModerneImage && (
-                <div 
+                <div
                   style={{
                     position: 'absolute',
                     top: '50%',
@@ -426,7 +429,7 @@ function App() {
                   >
                     ×
                   </button>
-                  
+
                   <p style={{
                     fontFamily: 'Sedan, serif',
                     fontSize: '1.5em',

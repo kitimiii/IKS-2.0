@@ -2,12 +2,12 @@
 .theory-page-title {
     /* Position - same as pageHint (top-left) */
     position: absolute;
-    top: 30px;
+    top: 40px;
     left: 50%;
     transform: translateX(-50%);
     /* Typography */
     font-family: 'Sedan', serif;
-    font-size: 2em;
+    font-size: 3em;
     font-weight: 600;
     color: #61554B;
     margin: 0;

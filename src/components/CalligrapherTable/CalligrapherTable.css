@@ -1,0 +1,56 @@
+.calligrapher-table-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.calligrapher-table {
+    font-family: 'Sedan', serif;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    background: transparent;
+    table-layout: fixed;
+}
+
+.calligrapher-table th,
+.calligrapher-table td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 12px 16px;
+    font-size: 0.95em;
+    line-height: 1.4;
+}
+
+/* Column widths */
+.calligrapher-table th:first-child,
+.calligrapher-table td:first-child {
+    width: 20%;
+    /* Erste Spalte schmaler */
+}
+
+.calligrapher-table th:nth-child(2),
+.calligrapher-table td:nth-child(2) {
+    width: 40%;
+    /* Zweite Spalte */
+}
+
+.calligrapher-table th:nth-child(3),
+.calligrapher-table td:nth-child(3) {
+    width: 40%;
+    /* Dritte Spalte */
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .calligrapher-table {
+        font-size: 0.85em;
+    }
+
+    .calligrapher-table th,
+    .calligrapher-table td {
+        padding: 8px 10px;
+    }
+}

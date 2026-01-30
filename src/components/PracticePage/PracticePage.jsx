@@ -2,11 +2,12 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 import PageWrapper from '../PageWrapper';
 import './PracticePage.css';
 import vorlage from '../../assets/nachfahren-vorlage.svg';
+import TrashBraun from '../../assets/Images/TrashBraun.PNG';
 
 // Konfigurierbare Größen - hier kannst du später Werte ändern
 const CONFIG = {
-    canvasWidth: 840,        // Canvas Breite
-    canvasHeight: 360,       // Canvas Höhe
+    canvasWidth: 860,        // Canvas Breite (User requested 860px)
+    canvasHeight: 330,       // Canvas Höhe (User requested 330px)
     canvasPadding: 20,       // Abstand um das SVG
     buttonSize: 40,          // Button Größe
 };
@@ -217,9 +218,6 @@ const PracticePage = ({
             onAudioClick={onAudioClick}
             isPlaying={isPlaying}
         >
-            {/* H1 Title - positioned top-left like pageHint */}
-            <h1 className="practice-page-title">{title}</h1>
-
             <div className="practice-canvas-wrapper">
                 {/* Anleitung Text */}
                 <p className="practice-instruction">
@@ -241,7 +239,10 @@ const PracticePage = ({
                         width={CONFIG.canvasWidth}
                         height={CONFIG.canvasHeight}
                         className="practice-canvas"
-                        style={{ cursor: getCursorStyle() }}
+                        style={{
+                            cursor: getCursorStyle(),
+                            touchAction: 'none'
+                        }}
                         onMouseDown={handleMouseDown}
                         onMouseMove={handleMouseMove}
                         onMouseUp={handleMouseUp}
@@ -282,6 +283,22 @@ const PracticePage = ({
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <polyline points="9 18 15 12 9 6" />
                             </svg>
+                        </button>
+                        <button
+                            className="practice-control-button trash-button"
+                            onClick={() => {
+                                setStrokes([]);
+                                setRedoStack([]);
+                            }}
+                            disabled={strokes.length === 0}
+                            style={{
+                                width: '40px',
+                                height: '40px',
+                                padding: '2px'
+                            }}
+                            title="Alles löschen"
+                        >
+                            <img src={TrashBraun} alt="Löschen" style={{ width: '70px', height: '70px', objectFit: 'contain' }} />
                         </button>
                     </div>
                 </div>
