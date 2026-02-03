@@ -43,6 +43,10 @@ import procreacteImg from './assets/slider-image2/procreacte.jpg';
 import wandImg from './assets/slider-image2/wand.jpg';
 import zitatImg from './assets/slider-image2/zitat.jpg';
 
+// Bilder für Practice-Seiten
+import SchreibuebungDeutsch from './assets/Images/SchreibuebungDeutsch.PNG';
+import SchreibuebungArabisch from './assets/Images/SchreibuebungArabisch.PNG';
+
 const moderneKalligrafieItems = [
   { image: quoteImg, text: 'text' },
   { image: brushImg, text: 'text' },
@@ -264,6 +268,7 @@ function App() {
               title="Federkiel"
               subtitleText="Nehme den Stift in die Hand und schreibe nun"
               subtitleText2="das Wort in der Federkiel Schrift nach"
+              imagePath={SchreibuebungDeutsch}
             />
           );
         }
@@ -298,6 +303,7 @@ function App() {
               title="Qualam"
               subtitleText="Nehme den Stift in die Hand und schreibe nun"
               subtitleText2="das Wort in der Qualam Schrift nach"
+              imagePath={SchreibuebungArabisch}
             />
           );
         }
