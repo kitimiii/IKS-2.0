@@ -17,7 +17,7 @@ const CONFIG = {
 const BRUSH = {
     baseSize: 4,
     minSize: 1,
-    maxSize: 8,
+    maxSize: 15,
     pressureSensitivity: 0.8,
 };
 
@@ -39,6 +39,7 @@ const PracticePage = ({
     const [redoStack, setRedoStack] = useState([]);
     const [currentStroke, setCurrentStroke] = useState([]);
     const [lastPoint, setLastPoint] = useState(null);
+    const [lastTime, setLastTime] = useState(null);
     const [svgLoaded, setSvgLoaded] = useState(false);
     const svgImageRef = useRef(null);
 
@@ -115,24 +116,70 @@ const PracticePage = ({
         }
     };
 
-    // Berechne Pinselgröße basierend auf Richtung
-    const calculateBrushSize = (prevPoint, currentPoint) => {
+    // Berechne Pinselgröße basierend auf Richtung oder Geschwindigkeit
+    const calculateBrushSize = (prevPoint, currentPoint, currentTime) => {
         if (!prevPoint) return BRUSH.baseSize;
 
         const dx = currentPoint.x - prevPoint.x;
         const dy = currentPoint.y - prevPoint.y;
         
-        // Berechne den Winkel der Bewegung
-        const angle = Math.atan2(dy, dx);
-        
-        // Vertikale Striche (±90°) = dick, Horizontale Striche (0° oder 180°) = dünn
-        // Math.cos gibt 1 bei 0°, 0 bei 90°, -1 bei 180°
-        const horizontalness = Math.abs(Math.cos(angle)); // 1 = horizontal, 0 = vertikal
-        
-        // Interpoliere zwischen minSize (horizontal) und maxSize (vertikal)
-        const newSize = BRUSH.minSize + (BRUSH.maxSize - BRUSH.minSize) * (1 - horizontalness);
-        
-        return newSize;
+        // Für Maobi: Strichstärke basierend auf Geschwindigkeit
+        if (title === 'Maobi') {
+            // Langsame Bewegung = dick, schnelle Bewegung = dünn
+            if (!lastTime || !currentTime) return BRUSH.baseSize;
+            
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const timeDelta = currentTime - lastTime;
+            
+            // Vermeide Division durch Null
+            if (timeDelta <= 0 || distance <= 0) return BRUSH.baseSize;
+            
+            // Geschwindigkeit in Pixel pro Millisekunde
+            const velocity = distance / timeDelta;
+            
+            // Geschwindigkeitsschwellenwerte (anpassbar)
+            const slowVelocity = 0.3;  // Langsam = unter 0.3 px/ms
+            const fastVelocity = 2.0;  // Schnell = über 2.0 px/ms
+            
+            // Normalisiere Geschwindigkeit (0 = langsam/dick, 1 = schnell/dünn)
+            let normalizedVelocity = (velocity - slowVelocity) / (fastVelocity - slowVelocity);
+            normalizedVelocity = Math.max(0, Math.min(1, normalizedVelocity));
+            
+            // Invertiere für dickere Striche bei langsamer Bewegung
+            const thickness = 1 - normalizedVelocity;
+            
+            // Interpoliere zwischen minSize (schnell) und maxSize (langsam)
+            const newSize = BRUSH.minSize + (BRUSH.maxSize - BRUSH.minSize) * thickness;
+            
+            return newSize;
+        } else {
+            // Für andere Werkzeuge: Strichstärke basierend auf Richtung
+            // Berechne den Winkel der Bewegung
+            const angle = Math.atan2(dy, dx);
+            
+            // Für Federkiel: 30° Rotation wie bei einem echten Federkiel
+            if (title === 'Federkiel') {
+                // Federkiel wird in 30° Winkel gehalten
+                const penAngle = -30 * Math.PI / 180; // 30° in Radiant
+                
+                // Berechne den Winkel relativ zur Federkiel-Orientierung
+                // Die dicksten Striche entstehen senkrecht zur Schnittfläche (bei 30° + 90° = 120°)
+                // Die dünnsten parallel zur Schnittfläche (bei 30°)
+                const relativeAngle = angle - penAngle;
+                
+                // sin² gibt uns die Strichstärke: 0 bei 0°/180° (dünn), 1 bei 90°/270° (dick)
+                const sinValue = Math.sin(relativeAngle);
+                const thickness = Math.abs(sinValue);
+                
+                // Interpoliere zwischen minSize und maxSize
+                const newSize = BRUSH.minSize + (BRUSH.maxSize - BRUSH.minSize) * thickness;
+                
+                return newSize;
+            } else {
+                // Für Qalam: Konstante Strichstärke in alle Richtungen (immer dick)
+                return BRUSH.maxSize;
+            }
+        }
     };
 
     // Mausposition relativ zum Canvas
@@ -152,9 +199,11 @@ const PracticePage = ({
     const handleMouseDown = (e) => {
         setIsDrawing(true);
         const pos = getMousePos(e);
+        const currentTime = Date.now();
         const point = { x: pos.x, y: pos.y, size: BRUSH.baseSize };
         setCurrentStroke([point]);
         setLastPoint(pos);
+        setLastTime(currentTime);
         setRedoStack([]);
     };
 
@@ -163,11 +212,13 @@ const PracticePage = ({
         if (!isDrawing) return;
 
         const pos = getMousePos(e);
-        const size = calculateBrushSize(lastPoint, pos);
+        const currentTime = Date.now();
+        const size = calculateBrushSize(lastPoint, pos, currentTime);
 
         const point = { x: pos.x, y: pos.y, size };
         setCurrentStroke(prev => [...prev, point]);
         setLastPoint(pos);
+        setLastTime(currentTime);
     };
 
     // Zeichnen beenden
@@ -178,6 +229,7 @@ const PracticePage = ({
         }
         setIsDrawing(false);
         setLastPoint(null);
+        setLastTime(null);
     };
 
     // Touch Events

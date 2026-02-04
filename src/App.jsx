@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import './App.css';
 import Dock from './components/Dock';
 import HeroPage from './pages/HeroPage';
@@ -65,10 +65,34 @@ const moderneKalligrafieItems = [
 function App() {
   const [activeItem, setActiveItem] = useState('Home');
   const [activeSubItem, setActiveSubItem] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null); // Now stores image number (1-12) instead of boolean
   const [selectedModerneImage, setSelectedModerneImage] = useState(null);
 
+  // Stable callbacks for CircularGallery - defined at top level
+  const handleImageClick = useCallback((imageIndex) => {
+    setSelectedImage(imageIndex);
+  }, []);
+
+  const handleCurrentImageChange = useCallback((imageIndex) => {
+    // Update popup content only if popup is already open
+    setSelectedImage(prev => prev !== null ? imageIndex : null);
+  }, []);
+
+  // Callbacks for Moderne Kalligrafie (Schriftwandel)
+  const handleModerneImageClick = useCallback((imageIndex) => {
+    setSelectedModerneImage(imageIndex);
+  }, []);
+
+  const handleModerneCurrentImageChange = useCallback((imageIndex) => {
+    // Update popup content only if popup is already open
+    setSelectedModerneImage(prev => prev !== null ? imageIndex : null);
+  }, []);
+
   const handleDockItemClick = (label, index) => {
+    // Reset popup states when changing pages
+    setSelectedImage(null);
+    setSelectedModerneImage(null);
+    
     // For Federkiel, Qualam, Maobi - automatically navigate to Theory sub-page
     if (label === 'Federkiel' || label === 'Qualam' || label === 'Maobi') {
       setActiveItem(label);
@@ -152,6 +176,25 @@ function App() {
           />
         );
       case 'Definition':
+        // Popup-Texte für jedes Bild
+        const getPopupText = (imageNumber) => {
+          const popupTexts = {
+            1: 'Platzhalter 1',
+            2: 'Platzhalter 2',
+            3: 'Platzhalter 3',
+            4: 'Platzhalter 4',
+            5: 'Platzhalter 5',
+            6: 'Platzhalter 6',
+            7: 'Platzhalter 7',
+            8: 'Platzhalter 8',
+            9: 'Platzhalter 9',
+            10: 'Platzhalter 10',
+            11: 'Platzhalter 11',
+            12: 'Platzhalter 12'
+          };
+          return popupTexts[imageNumber] || 'Platzhalter';
+        };
+
         return (
           <PageWrapper
             pageHint="kleiner Einblick was die Page beinhaltet…"
@@ -166,10 +209,7 @@ function App() {
               justifyContent: 'center',
               transform: 'translateY(-40px)' // Moved up to avoid Dock collision
             }}>
-              <div
-                onClick={() => setSelectedImage(true)}
-                style={{ width: '100%', height: '100%', cursor: 'pointer' }}
-              >
+              <div style={{ width: '100%', height: '100%' }}>
                 <CircularGallery
                   bend={1}
                   textColor="#61554B"
@@ -177,6 +217,8 @@ function App() {
                   scrollSpeed={1.2}
                   scrollEase={0.05}
                   font="30px Sedan"
+                  onImageClick={handleImageClick}
+                  onCurrentImageChange={handleCurrentImageChange}
                 />
               </div>
 
@@ -184,16 +226,16 @@ function App() {
                 <div
                   style={{
                     position: 'absolute',
-                    top: '50%',
+                    bottom: '10px',
                     left: '50%',
-                    transform: 'translate(-50%, -50%)',
+                    transform: 'translateX(-50%)',
                     width: '300px',
-                    height: '400px',
-                    background: 'rgba(249, 235, 213, 0.7)',
+                    height: '100px',
+                    background: 'rgba(249, 235, 213, 0.95)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    padding: '40px',
+                    padding: '15px',
                     borderRadius: '10px',
                     boxShadow: '0 10px 40px rgba(0, 0, 0, 0.3)',
                     zIndex: 1000,
@@ -209,15 +251,15 @@ function App() {
                     }}
                     style={{
                       position: 'absolute',
-                      top: '10px',
-                      right: '10px',
+                      top: '5px',
+                      right: '5px',
                       background: '#61554B',
                       color: '#F9EBD5',
                       border: 'none',
                       borderRadius: '50%',
-                      width: '35px',
-                      height: '35px',
-                      fontSize: '1.5em',
+                      width: '25px',
+                      height: '25px',
+                      fontSize: '1.2em',
                       cursor: 'pointer',
                       display: 'flex',
                       alignItems: 'center',
@@ -240,12 +282,12 @@ function App() {
 
                   <p style={{
                     fontFamily: 'Sedan, serif',
-                    fontSize: '1.5em',
+                    fontSize: '1em',
                     color: '#61554B',
                     textAlign: 'center',
                     margin: 0
                   }}>
-                    Das ist ein Platzhalter der richtige Text folgt noch
+                    {getPopupText(selectedImage)}
                   </p>
                 </div>
               )}
@@ -377,6 +419,26 @@ function App() {
             </PageWrapper>
           );
         }
+        
+        // Popup-Texte für jedes Bild in Moderne Kalligrafie
+        const getModernePopupText = (imageNumber) => {
+          const popupTexts = {
+            1: 'Platzhalter 1',
+            2: 'Platzhalter 2',
+            3: 'Platzhalter 3',
+            4: 'Platzhalter 4',
+            5: 'Platzhalter 5',
+            6: 'Platzhalter 6',
+            7: 'Platzhalter 7',
+            8: 'Platzhalter 8',
+            9: 'Platzhalter 9',
+            10: 'Platzhalter 10',
+            11: 'Platzhalter 11',
+            12: 'Platzhalter 12'
+          };
+          return popupTexts[imageNumber] || 'Platzhalter';
+        };
+        
         // Default: Moderne Kalligrafie
         return (
           <PageWrapper
@@ -392,10 +454,7 @@ function App() {
               justifyContent: 'center',
               transform: 'translateY(-40px)' // Moved up to avoid Dock collision
             }}>
-              <div
-                onClick={() => setSelectedModerneImage(true)}
-                style={{ width: '100%', height: '100%', cursor: 'pointer' }}
-              >
+              <div style={{ width: '100%', height: '100%' }}>
                 <CircularGallery
                   items={moderneKalligrafieItems}
                   bend={1}
@@ -404,6 +463,8 @@ function App() {
                   scrollSpeed={1.2}
                   scrollEase={0.05}
                   font="30px Sedan"
+                  onImageClick={handleModerneImageClick}
+                  onCurrentImageChange={handleModerneCurrentImageChange}
                 />
               </div>
 
@@ -411,16 +472,16 @@ function App() {
                 <div
                   style={{
                     position: 'absolute',
-                    top: '50%',
+                    bottom: '20px',
                     left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    width: '300px',
-                    height: '400px',
-                    background: 'rgba(249, 235, 213, 0.7)',
+                    transform: 'translateX(-50%)',
+                    width: '200px',
+                    height: '100px',
+                    background: 'rgba(249, 235, 213, 0.95)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    padding: '40px',
+                    padding: '15px',
                     borderRadius: '10px',
                     boxShadow: '0 10px 40px rgba(0, 0, 0, 0.3)',
                     zIndex: 1000,
@@ -436,15 +497,15 @@ function App() {
                     }}
                     style={{
                       position: 'absolute',
-                      top: '10px',
-                      right: '10px',
+                      top: '5px',
+                      right: '5px',
                       background: '#61554B',
                       color: '#F9EBD5',
                       border: 'none',
                       borderRadius: '50%',
-                      width: '35px',
-                      height: '35px',
-                      fontSize: '1.5em',
+                      width: '25px',
+                      height: '25px',
+                      fontSize: '1.2em',
                       cursor: 'pointer',
                       display: 'flex',
                       alignItems: 'center',
@@ -467,12 +528,12 @@ function App() {
 
                   <p style={{
                     fontFamily: 'Sedan, serif',
-                    fontSize: '1.5em',
+                    fontSize: '1em',
                     color: '#61554B',
                     textAlign: 'center',
                     margin: 0
                   }}>
-                    Das ist ein Platzhalter der richtige Text folgt noch
+                    {getModernePopupText(selectedModerneImage)}
                   </p>
                 </div>
               )}

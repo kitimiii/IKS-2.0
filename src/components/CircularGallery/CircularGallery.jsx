@@ -305,7 +305,9 @@ class App {
             borderRadius = 0,
             font = 'bold 30px Figtree',
             scrollSpeed = 2,
-            scrollEase = 0.05
+            scrollEase = 0.05,
+            onImageClick,
+            onCurrentImageChange
         } = {}
     ) {
         document.documentElement.classList.remove('no-js');
@@ -313,6 +315,9 @@ class App {
         this.scrollSpeed = scrollSpeed;
         this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0 };
         this.onCheckDebounce = debounce(this.onCheck, 200);
+        this.onImageClick = onImageClick;
+        this.onCurrentImageChange = onCurrentImageChange;
+        this.currentImageIndex = null;
         this.createRenderer();
         this.createCamera();
         this.createScene();
@@ -386,15 +391,40 @@ class App {
         this.isDown = true;
         this.scroll.position = this.scroll.current;
         this.start = e.touches ? e.touches[0].clientX : e.clientX;
+        this.clickStart = Date.now();
+        this.clickX = this.start;
+        this.hasMoved = false;
     }
     onTouchMove(e) {
         if (!this.isDown) return;
         const x = e.touches ? e.touches[0].clientX : e.clientX;
         const distance = (this.start - x) * (this.scrollSpeed * 0.025);
+        
+        // Track if user has moved
+        if (Math.abs(this.start - x) > 5) {
+            this.hasMoved = true;
+        }
+        
         this.scroll.target = this.scroll.position + distance;
     }
-    onTouchUp() {
+    onTouchUp(e) {
+        if (!this.isDown) return;
         this.isDown = false;
+        
+        // Check if this was a click (not a drag)
+        const clickTime = Date.now() - this.clickStart;
+        
+        // If quick click with minimal movement, treat as image click
+        if (clickTime < 300 && !this.hasMoved && this.onImageClick && this.medias && this.medias[0]) {
+            // Find which image was clicked based on scroll position
+            const galleryLength = this.mediasImages.length / 2; // Original length (not duplicated)
+            const width = this.medias[0].width;
+            let currentIndex = Math.round(Math.abs(this.scroll.current) / width) % galleryLength;
+            // Ensure positive index
+            if (currentIndex < 0) currentIndex += galleryLength;
+            this.onImageClick(currentIndex + 1); // +1 to make it 1-indexed
+        }
+        
         this.onCheck();
     }
     onWheel(e) {
@@ -431,6 +461,29 @@ class App {
         const direction = this.scroll.current > this.scroll.last ? 'right' : 'left';
         if (this.medias) {
             this.medias.forEach(media => media.update(this.scroll, direction));
+            
+            // Check if current focused image changed (only if callback exists)
+            if (this.onCurrentImageChange && this.medias[0] && this.mediasImages) {
+                const galleryLength = this.mediasImages.length / 2;
+                const width = this.medias[0].width;
+                let newIndex = Math.round(Math.abs(this.scroll.current) / width) % galleryLength;
+                if (newIndex < 0) newIndex += galleryLength;
+                
+                // Only trigger callback if index actually changed
+                if (this.currentImageIndex !== newIndex) {
+                    this.currentImageIndex = newIndex;
+                    // Use requestAnimationFrame to prevent too many rapid updates
+                    if (!this.pendingImageChange) {
+                        this.pendingImageChange = true;
+                        requestAnimationFrame(() => {
+                            this.pendingImageChange = false;
+                            if (this.onCurrentImageChange) {
+                                this.onCurrentImageChange(newIndex + 1); // +1 to make it 1-indexed
+                            }
+                        });
+                    }
+                }
+            }
         }
         this.renderer.render({ scene: this.scene, camera: this.camera });
         this.scroll.last = this.scroll.current;
@@ -476,14 +529,16 @@ export default function CircularGallery({
     borderRadius = 0.05,
     font = '30px Sedan',
     scrollSpeed = 2,
-    scrollEase = 0.05
+    scrollEase = 0.05,
+    onImageClick,
+    onCurrentImageChange
 }) {
     const containerRef = useRef(null);
     useEffect(() => {
-        const app = new App(containerRef.current, { items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase });
+        const app = new App(containerRef.current, { items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase, onImageClick, onCurrentImageChange });
         return () => {
             app.destroy();
         };
-    }, [items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase]);
+    }, [items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase, onImageClick, onCurrentImageChange]);
     return <div className="circular-gallery" ref={containerRef} />;
 }

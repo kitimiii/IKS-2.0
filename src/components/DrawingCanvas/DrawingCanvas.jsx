@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import './DrawingCanvas.css';
-import vorlage from '../../assets/nachfahren-vorlage.svg';
+import vorlage from '../../assets/Images/Grundschreibübung_quer.png';
 import TrashBraun from '../../assets/Images/TrashBraun.PNG';
 
 // Konfigurierbare Größen - hier kannst du später Werte ändern
@@ -16,18 +16,25 @@ const CONFIG = {
 // Pinsel-Konfiguration
 const BRUSHES = {
     feder: {
-        name: 'Feder',
+        name: 'Federkiel',
         baseSize: 2,         // Dünnere Basisstärke
         minSize: 0.5,
         maxSize: 4,
         pressureSensitivity: 0.8,
     },
     pinsel: {
-        name: 'Pinsel',
+        name: 'Maobi',
         baseSize: 6,         // Dickere Basisstärke
         minSize: 3,
         maxSize: 12,
         pressureSensitivity: 1.2,
+    },
+    qalam: {
+        name: 'Qalam',
+        baseSize: 2,         // Mittlere Basisstärke
+        minSize: 1,
+        maxSize: 8,
+        pressureSensitivity: 0.8,
     }
 };
 
@@ -39,6 +46,7 @@ const DrawingCanvas = () => {
     const [redoStack, setRedoStack] = useState([]);
     const [currentStroke, setCurrentStroke] = useState([]);
     const [lastPoint, setLastPoint] = useState(null);
+    const [lastTime, setLastTime] = useState(null);
     const [svgLoaded, setSvgLoaded] = useState(false);
     const svgImageRef = useRef(null);
 
@@ -114,15 +122,15 @@ const DrawingCanvas = () => {
         }
     };
 
-    // Berechne Pinselgröße basierend auf Richtung
-    const calculateBrushSize = (prevPoint, currentPoint, brush) => {
+    // Berechne Pinselgröße basierend auf Richtung oder Geschwindigkeit
+    const calculateBrushSize = (prevPoint, currentPoint, brush, currentTime) => {
         if (!prevPoint) return brush.baseSize;
 
         const dx = currentPoint.x - prevPoint.x;
         const dy = currentPoint.y - prevPoint.y;
         
-        // Für Feder: Strichstärke basierend auf Richtung
-        if (brush.name === 'Feder') {
+        // Für Federkiel: Strichstärke basierend auf Richtung
+        if (brush.name === 'Federkiel') {
             // Berechne den Winkel der Bewegung
             const angle = Math.atan2(dy, dx);
             
@@ -135,8 +143,37 @@ const DrawingCanvas = () => {
             const newSize = brush.minSize + (brush.maxSize - brush.minSize) * (1 - horizontalness);
             
             return newSize;
+        } else if (brush.name === 'Maobi') {
+            // Für Maobi: Strichstärke basierend auf Geschwindigkeit
+            // Langsame Bewegung = dick, schnelle Bewegung = dünn
+            if (!lastTime || !currentTime) return brush.baseSize;
+            
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const timeDelta = currentTime - lastTime;
+            
+            // Vermeide Division durch Null
+            if (timeDelta <= 0 || distance <= 0) return brush.baseSize;
+            
+            // Geschwindigkeit in Pixel pro Millisekunde
+            const velocity = distance / timeDelta;
+            
+            // Geschwindigkeitsschwellenwerte (anpassbar)
+            const slowVelocity = 0.3;  // Langsam = unter 0.3 px/ms
+            const fastVelocity = 1.0;  // Schnell = über 2.0 px/ms
+            
+            // Normalisiere Geschwindigkeit (0 = langsam/dick, 1 = schnell/dünn)
+            let normalizedVelocity = (velocity - slowVelocity) / (fastVelocity - slowVelocity);
+            normalizedVelocity = Math.max(0, Math.min(1, normalizedVelocity));
+            
+            // Invertiere für dickere Striche bei langsamer Bewegung
+            const thickness = 1 - normalizedVelocity;
+            
+            // Interpoliere zwischen minSize (schnell) und maxSize (langsam)
+            const newSize = brush.minSize + (brush.maxSize - brush.minSize) * thickness;
+            
+            return newSize;
         } else {
-            // Für Pinsel: ursprüngliche Logik beibehalten
+            // Für Qalam: ursprüngliche Logik beibehalten
             const sensitivity = brush.pressureSensitivity;
             let sizeModifier = dy * 0.05 * sensitivity;
             let newSize = brush.baseSize + sizeModifier;
@@ -162,10 +199,12 @@ const DrawingCanvas = () => {
     const handleMouseDown = (e) => {
         setIsDrawing(true);
         const pos = getMousePos(e);
+        const currentTime = Date.now();
         const brush = BRUSHES[currentBrush];
         const point = { x: pos.x, y: pos.y, size: brush.baseSize };
         setCurrentStroke([point]);
         setLastPoint(pos);
+        setLastTime(currentTime);
         setRedoStack([]); // Redo-Stack leeren bei neuem Strich
     };
 
@@ -174,12 +213,14 @@ const DrawingCanvas = () => {
         if (!isDrawing) return;
 
         const pos = getMousePos(e);
+        const currentTime = Date.now();
         const brush = BRUSHES[currentBrush];
-        const size = calculateBrushSize(lastPoint, pos, brush);
+        const size = calculateBrushSize(lastPoint, pos, brush, currentTime);
 
         const point = { x: pos.x, y: pos.y, size };
         setCurrentStroke(prev => [...prev, point]);
         setLastPoint(pos);
+        setLastTime(currentTime);
     };
 
     // Zeichnen beenden
@@ -190,6 +231,7 @@ const DrawingCanvas = () => {
         }
         setIsDrawing(false);
         setLastPoint(null);
+        setLastTime(null);
     };
 
     // Touch Events
@@ -281,7 +323,7 @@ const DrawingCanvas = () => {
                             height: CONFIG.brushButtonHeight
                         }}
                     >
-                        Feder
+                        {BRUSHES.feder.name}
                     </button>
                     <button
                         className={`brush-button ${currentBrush === 'pinsel' ? 'active' : ''}`}
@@ -291,7 +333,17 @@ const DrawingCanvas = () => {
                             height: CONFIG.brushButtonHeight
                         }}
                     >
-                        Pinsel
+                        {BRUSHES.pinsel.name}
+                    </button>
+                    <button
+                        className={`brush-button ${currentBrush === 'qalam' ? 'active' : ''}`}
+                        onClick={() => setCurrentBrush('qalam')}
+                        style={{
+                            width: CONFIG.brushButtonWidth,
+                            height: CONFIG.brushButtonHeight
+                        }}
+                    >
+                        {BRUSHES.qalam.name}
                     </button>
                 </div>
 
