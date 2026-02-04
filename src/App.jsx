@@ -287,7 +287,7 @@ function App() {
             modelContainerHeight={400}
             baseRotation={[0, 0, 0]}
             autoRotateSpeed={0.35}
-            // InfotextBox settings
+            // InfotextBox settings 
             infoBoxHeight={400}
           />
         );
