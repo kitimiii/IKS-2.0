@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 import PageWrapper from '../PageWrapper';
 import './PracticePage.css';
 import vorlage from '../../assets/nachfahren-vorlage.svg';
+import SchreibuebungDeutsch from '../../assets/Images/SchreibuebungDeutsch.PNG';
 import TrashBraun from '../../assets/Images/TrashBraun.PNG';
 
 // Konfigurierbare Größen - hier kannst du später Werte ändern
@@ -29,6 +30,8 @@ const PracticePage = ({
     // Audio controls
     onAudioClick,
     isPlaying = false,
+    // Optional: Custom image path
+    imagePath,
 }) => {
     const canvasRef = useRef(null);
     const [isDrawing, setIsDrawing] = useState(false);
@@ -46,8 +49,9 @@ const PracticePage = ({
             svgImageRef.current = img;
             setSvgLoaded(true);
         };
-        img.src = vorlage;
-    }, []);
+        // Verwende das übergebene Bild oder das Standard-SVG
+        img.src = imagePath || vorlage;
+    }, [imagePath]);
 
     // Canvas zeichnen/neu zeichnen
     const redrawCanvas = useCallback(() => {
