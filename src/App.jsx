@@ -472,10 +472,10 @@ function App() {
                 <div
                   style={{
                     position: 'absolute',
-                    bottom: '20px',
+                    bottom: '10px',
                     left: '50%',
                     transform: 'translateX(-50%)',
-                    width: '200px',
+                    width: '300px',
                     height: '100px',
                     background: 'rgba(249, 235, 213, 0.95)',
                     display: 'flex',
