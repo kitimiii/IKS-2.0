@@ -1,0 +1,11 @@
+Model Information:
+* title:	Maobí_Pinsel
+* source:	https://sketchfab.com/3d-models/maobi-pinsel-251179665151470299b37f4ed8dfd0f8
+* author:	Kitimii (https://sketchfab.com/Mikiti)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Maobí_Pinsel" (https://sketchfab.com/3d-models/maobi-pinsel-251179665151470299b37f4ed8dfd0f8) by Kitimii (https://sketchfab.com/Mikiti) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
