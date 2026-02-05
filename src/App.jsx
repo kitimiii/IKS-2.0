@@ -58,7 +58,8 @@ import SchreibuebungArabisch from './assets/Images/SchreibuebungArabisch.PNG';
 import SchreibuebungChinesisch from './assets/Images/Schreibübung_chinesisch.svg';
 
 // Bilder für Der Kalligraf Seite
-import kalligrafImg from './assets/Images/Kalligraf.png';
+import traditionalImg from './assets/Images/traditional.png';
+import modernImg from './assets/Images/modern.png';
 
 const moderneKalligrafieItems = [
   { image: quoteImg, text: 'text' },
