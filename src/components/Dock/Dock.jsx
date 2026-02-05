@@ -5,11 +5,11 @@ import { Children, cloneElement, useEffect, useMemo, useRef, useState } from 're
 
 import './Dock.css';
 
-// Sub-Items für die speziellen Dock Items (Feather quill, Qalam , Maobi, Schriftwandel)
+// Sub-Items für die speziellen Dock Items (Feather quill, Qalam , Maobi, Evolution of Script)
 const subItemsConfig = {
-    'Federkiel': [
-        { text: 'Theory', id: 'Federkiel-sub-1' },
-        { text: 'Practice', id: 'Federkiel-sub-2' }
+    'Quill pen': [
+        { text: 'Theory', id: 'Quill pen-sub-1' },
+        { text: 'Practice', id: 'Quill pen-sub-2' }
     ],
     'Qalam ': [
         { text: 'Theory', id: 'Qalam -sub-1' },
@@ -19,9 +19,9 @@ const subItemsConfig = {
         { text: 'Theory', id: 'maobi-sub-1' },
         { text: 'Practice', id: 'maobi-sub-2' }
     ],
-    'Schriftwandel': [
-        { text: 'Moderne Kalligrafie', id: 'schriftwandel-sub-1' },
-        { text: 'Der Kalligraf', id: 'schriftwandel-sub-2' }
+    'Evolution of Script': [
+        { text: 'Modern\nCalligraphy', id: 'Evolution of Script-sub-1' },
+        { text: 'The\nCalligrapher', id: 'Evolution of Script-sub-2' }
     ]
 };
 
@@ -39,8 +39,14 @@ function DockSubItem({ text, onClick, baseItemSize, isActive }) {
             transition={{ duration: 0.2 }}
             className={`dock-sub-item ${isActive ? 'dock-sub-item-active' : ''}`}
             style={{
-                width: subItemSize,
-                height: subItemSize
+                width: 'auto',
+                height: 'auto',
+                minWidth: subItemSize,
+                minHeight: subItemSize,
+                padding: '5px 10px',
+                whiteSpace: 'pre-line',
+                textAlign: 'center',
+                lineHeight: '1.2'
             }}
             onClick={onClick}
             tabIndex={0}
@@ -74,14 +80,14 @@ function DockItem({ children, className = '', onClick, mouseX, spring, distance,
     const isSubItemActive = (id) => {
         if (!activeSubItem) return false;
 
-        // Schriftwandel Cases
-        if (activeSubItem === 'moderneKalligrafie' && id === 'schriftwandel-sub-1') return true;
-        if (activeSubItem === 'machingGame' && id === 'schriftwandel-sub-2') return true;
+        // Evolution of Script Cases
+        if (activeSubItem === 'moderneKalligrafie' && id === 'Evolution of Script-sub-1') return true;
+        if (activeSubItem === 'machingGame' && id === 'Evolution of Script-sub-2') return true;
 
         // Theory/Practice Cases (Feather quill, Qalam , Maobi)
-        // Check contents but exclude schriftwandel to be safe
-        if (activeSubItem === 'theory' && id.includes('sub-1') && !id.includes('schriftwandel')) return true;
-        if (activeSubItem === 'practice' && id.includes('sub-2') && !id.includes('schriftwandel')) return true;
+        // Check contents but exclude Evolution of Script to be safe
+        if (activeSubItem === 'theory' && id.includes('sub-1') && !id.includes('Evolution of Script')) return true;
+        if (activeSubItem === 'practice' && id.includes('sub-2') && !id.includes('Evolution of Script')) return true;
 
         return false;
     };

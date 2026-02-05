@@ -172,7 +172,7 @@ const CalligraphyGame = ({
             {/* Result Row - shows after submit */}
             {isSubmitted && (
                 <div className="result-row">
-                    <span className="result-text">{correctAnswersCount}/4 richtig</span>
+                    <span className="result-text">{correctAnswersCount}/4 right</span>
                     {correctAnswersCount !== 4 && (
                         <button className="try-again-button" onClick={handleTryAgain}>
                             Try Again

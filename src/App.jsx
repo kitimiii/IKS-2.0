@@ -16,8 +16,13 @@ import definitionAudio from './assets/Audios/Definiton.mov';
 import grunduebungAudio from './assets/Audios/Grundübung.mov';
 import federkielAudio from './assets/Audios/Federkiel.mov';
 import federkiel2Audio from './assets/Audios/Federkiel2.mov';
+
+import qalamAudio from './assets/Audios/Qalam.mov';
+import qalam2Audio from './assets/Audios/Qalam2.mov';
 import maobiAudio from './assets/Audios/Maobi.mov';
 import maobi2Audio from './assets/Audios/Maobi2.mov';
+import modernAudio from './assets/Audios/modern.mov';
+import modernVStraditionellAudio from './assets/Audios/modernVStraditionell.mov';
 
 // Dock Icon Bilder
 import HausBraun from './assets/Images/HausBraun.PNG';
@@ -57,7 +62,7 @@ import SchreibuebungDeutsch from './assets/Images/SchreibuebungDeutsch.png';
 import SchreibuebungArabisch from './assets/Images/SchreibuebungArabisch.png';
 import SchreibuebungChinesisch from './assets/Images/Schreibübung_chinesisch.svg';
 
-// Bilder für Der Kalligraf Seite
+// Bilder für The Calligrapher Seite
 import traditionalImg from './assets/Images/traditional.png';
 import modernImg from './assets/Images/modern.png';
 
@@ -89,8 +94,13 @@ function App() {
   const grunduebungAudioRef = useRef(null);
   const federkielAudioRef = useRef(null);
   const federkiel2AudioRef = useRef(null);
+
+  const qalamAudioRef = useRef(null);
+  const qalam2AudioRef = useRef(null);
   const maobiAudioRef = useRef(null);
   const maobi2AudioRef = useRef(null);
+  const modernAudioRef = useRef(null);
+  const modernVStraditionellAudioRef = useRef(null);
 
   // Stable callbacks for CircularGallery - defined at top level
   const handleImageClick = useCallback((imageIndex) => {
@@ -102,7 +112,7 @@ function App() {
     setSelectedImage(prev => prev !== null ? imageIndex : null);
   }, []);
 
-  // Callbacks for Moderne Kalligrafie (Schriftwandel)
+  // Callbacks for Moderne Kalligrafie (Evolution of Script)
   const handleModerneImageClick = useCallback((imageIndex) => {
     setSelectedModerneImage(imageIndex);
   }, []);
@@ -145,7 +155,7 @@ function App() {
     }
 
     // Feather quill theory page
-    if (activeItem === 'Feather quill' && activeSubItem !== 'practice' && federkielAudioRef.current) {
+    if (activeItem === 'Quill pen' && activeSubItem !== 'practice' && federkielAudioRef.current) {
       federkielAudioRef.current.play().catch(error => {
         console.log('Auto-play prevented by browser:', error);
       });
@@ -155,13 +165,33 @@ function App() {
     }
 
     // Feather quill practice page
-    if (activeItem === 'Federkiel' && activeSubItem === 'practice' && federkiel2AudioRef.current) {
+    if (activeItem === 'Quill pen' && activeSubItem === 'practice' && federkiel2AudioRef.current) {
       federkiel2AudioRef.current.play().catch(error => {
         console.log('Auto-play prevented by browser:', error);
       });
     } else if (federkiel2AudioRef.current) {
       federkiel2AudioRef.current.pause();
       federkiel2AudioRef.current.currentTime = 0;
+    }
+
+    // Qalam theory page
+    if (activeItem === 'Qalam ' && activeSubItem !== 'practice' && qalamAudioRef.current) {
+      qalamAudioRef.current.play().catch(error => {
+        console.log('Auto-play prevented by browser:', error);
+      });
+    } else if (qalamAudioRef.current) {
+      qalamAudioRef.current.pause();
+      qalamAudioRef.current.currentTime = 0;
+    }
+
+    // Qalam practice page
+    if (activeItem === 'Qalam ' && activeSubItem === 'practice' && qalam2AudioRef.current) {
+      qalam2AudioRef.current.play().catch(error => {
+        console.log('Auto-play prevented by browser:', error);
+      });
+    } else if (qalam2AudioRef.current) {
+      qalam2AudioRef.current.pause();
+      qalam2AudioRef.current.currentTime = 0;
     }
 
     // Maobi theory page
@@ -182,6 +212,26 @@ function App() {
     } else if (maobi2AudioRef.current) {
       maobi2AudioRef.current.pause();
       maobi2AudioRef.current.currentTime = 0;
+    }
+
+    // Evolution of Script - The Calligrapher
+    if (activeItem === 'Evolution of Script' && activeSubItem === 'machingGame' && modernVStraditionellAudioRef.current) {
+      modernVStraditionellAudioRef.current.play().catch(error => {
+        console.log('Auto-play prevented by browser:', error);
+      });
+    } else if (modernVStraditionellAudioRef.current) {
+      modernVStraditionellAudioRef.current.pause();
+      modernVStraditionellAudioRef.current.currentTime = 0;
+    }
+
+    // Evolution of Script - Modern Calligraphy
+    if (activeItem === 'Evolution of Script' && activeSubItem !== 'machingGame' && modernAudioRef.current) {
+      modernAudioRef.current.play().catch(error => {
+        console.log('Auto-play prevented by browser:', error);
+      });
+    } else if (modernAudioRef.current) {
+      modernAudioRef.current.pause();
+      modernAudioRef.current.currentTime = 0;
     }
   }, [activeItem, activeSubItem]);
 
@@ -217,6 +267,16 @@ function App() {
     console.log('Federkiel2 audio ended');
   };
 
+  const handleQalamAudioEnded = () => {
+    // Do nothing - audio plays only once
+    console.log('Qalam audio ended');
+  };
+
+  const handleQalam2AudioEnded = () => {
+    // Do nothing - audio plays only once
+    console.log('Qalam2 audio ended');
+  };
+
   const handleMaobiAudioEnded = () => {
     // Do nothing - audio plays only once
     console.log('Maobi audio ended');
@@ -225,6 +285,14 @@ function App() {
   const handleMaobi2AudioEnded = () => {
     // Do nothing - audio plays only once
     console.log('Maobi2 audio ended');
+  };
+
+  const handleModernAudioEnded = () => {
+    console.log('Modern Calligraphy audio ended');
+  };
+
+  const handleModernVStraditionellAudioEnded = () => {
+    console.log('The Calligrapher audio ended');
   };
 
   const handleDockItemClick = (label, index) => {
@@ -237,10 +305,10 @@ function App() {
       setActiveItem(label);
       setActiveSubItem('theory');
       console.log(`Navigiere direkt zu: ${label} Theory`);
-    } else if (label === 'Schriftwandel') {
+    } else if (label === 'Evolution of Script') {
       setActiveItem(label);
       setActiveSubItem('moderneKalligrafie');
-      console.log(`Navigiere direkt zu: ${label} Moderne Kalligrafie`);
+      console.log(`Navigiere direkt zu: ${label} Modern Calligraphy`);
     } else {
       setActiveItem(label);
       setActiveSubItem(null);
@@ -251,9 +319,9 @@ function App() {
   const handleSubItemClick = (subItemId) => {
     console.log(`Sub-Item geklickt: ${subItemId}`);
     // Handle sub-item navigation
-    if (subItemId.includes('schriftwandel-sub-1')) {
+    if (subItemId.includes('Evolution of Script-sub-1')) {
       setActiveSubItem('moderneKalligrafie');
-    } else if (subItemId.includes('schriftwandel-sub-2')) {
+    } else if (subItemId.includes('Evolution of Script-sub-2')) {
       setActiveSubItem('machingGame');
     } else if (subItemId.includes('sub-1')) {
       // General theory for other items
@@ -278,8 +346,8 @@ function App() {
       label: 'Basic exercise'
     },
     {
-      icon: <img src={activeItem === 'Federkiel' ? FederBeige : FederBraun} alt="Federkiel" style={{ width: '60px', height: '60px' }} />,
-      label: 'Federkiel'
+      icon: <img src={activeItem === 'Quill pen' ? FederBeige : FederBraun} alt="Quill pen" style={{ width: '60px', height: '60px' }} />,
+      label: 'Quill pen'
     },
     {
       icon: <img src={activeItem === 'Qalam ' ? QalamBeige : QalamBraun} alt="Qalam " style={{ width: '60px', height: '60px' }} />,
@@ -290,12 +358,12 @@ function App() {
       label: 'Maobi'
     },
     {
-      icon: <img src={activeItem === 'Schriftwandel' ? PaperBeige : PaperBraun} alt="Schriftwandel" style={{ width: '60px', height: '60px' }} />,
-      label: 'Schriftwandel'
+      icon: <img src={activeItem === 'Evolution of Script' ? PaperBeige : PaperBraun} alt="Evolution of Script" style={{ width: '60px', height: '60px' }} />,
+      label: 'Evolution of Script'
     },
     {
-      icon: <img src={activeItem === 'Puzzle' ? PuzzleBeige : PuzzleBraun} alt="Puzzle" style={{ width: '60px', height: '60px' }} />,
-      label: 'Puzzle'
+      icon: <img src={activeItem === 'Maching Game' ? PuzzleBeige : PuzzleBraun} alt="Puzzle" style={{ width: '60px', height: '60px' }} />,
+      label: 'Maching Game'
     },
   ];
 
@@ -464,7 +532,7 @@ function App() {
             <DrawingCanvas />
           </PageWrapper>
         );
-      case 'Federkiel':
+      case 'Quill pen':
         if (activeSubItem === 'practice') {
           return (
             <>
@@ -475,8 +543,8 @@ function App() {
                 onEnded={handleFederkiel2AudioEnded}
               />
               <PracticePage
-                title="Federkiel"
-                subtitleText="Nehme den Stift in die Hand und schreibe nun"
+                title="Quill pen"
+                subtitleText="Pick up the pen and write the word in Quill pen script."
                 subtitleText2=""
                 imagePath={SchreibuebungDeutsch}
               />
@@ -485,7 +553,7 @@ function App() {
         }
         return (
           <TheoryPage
-            title="Federkiel"
+            title="Quill pen"
             infoContent={
               <>
                 {/* Audio Element for Federkiel */}
@@ -504,7 +572,7 @@ function App() {
                 </ul>
               </>
             }
-            isVisible={activeItem === 'Federkiel' && activeSubItem !== 'practice'}
+            isVisible={activeItem === 'Quill pen' && activeSubItem !== 'practice'}
             // 3D Model settings
             modelPath="/models/Featherquill_3D/scene.gltf"
             modelContainerWidth={500}
@@ -521,27 +589,43 @@ function App() {
       case 'Qalam ':
         if (activeSubItem === 'practice') {
           return (
-            <PracticePage
-              title="Qalam "
-              subtitleText="Nehme den Stift in die Hand und schreibe nun"
-              subtitleText2="das Wort in der Qalam  Schrift nach"
-              imagePath={SchreibuebungArabisch}
-            />
+            <>
+              <PracticePage
+                title="Qalam "
+                subtitleText="Pick up the pen and write the word in Qalam script."
+                subtitleText2=""
+                imagePath={SchreibuebungArabisch}
+              />
+              {/* Audio Element for Qalam Practice */}
+              <audio
+                ref={qalam2AudioRef}
+                src={qalam2Audio}
+                onEnded={handleQalam2AudioEnded}
+              />
+            </>
           );
         }
         return (
           <TheoryPage
             title="Qalam "
             infoContent={
-              <ul>
-                <li>Traditional reed pen used across the Middle East</li>
-                <li>Especially important in the Islamic world</li>
-                <li>Tip cut at an angle for clear, sharp, angular lines</li>
-                <li>Ideal for geometric writing styles</li>
-                <li>Most important tool in Islamic calligraphy</li>
-                <li>Often used for copying the Quran</li>
-                <li>Script held high cultural and spiritual importance <br /> because images were avoided</li>
-              </ul>
+              <>
+                <ul>
+                  <li>Traditional reed pen used across the Middle East</li>
+                  <li>Especially important in the Islamic world</li>
+                  <li>Tip cut at an angle for clear, sharp, angular lines</li>
+                  <li>Ideal for geometric writing styles</li>
+                  <li>Most important tool in Islamic calligraphy</li>
+                  <li>Often used for copying the Quran</li>
+                  <li>Script held high cultural and spiritual importance <br /> because images were avoided</li>
+                </ul>
+                {/* Audio Element for Qalam Theory */}
+                <audio
+                  ref={qalamAudioRef}
+                  src={qalamAudio}
+                  onEnded={handleQalamAudioEnded}
+                />
+              </>
             }
             isVisible={activeItem === 'Qalam ' && activeSubItem !== 'practice'}
             // 3D Model settings
@@ -569,8 +653,8 @@ function App() {
               />
               <PracticePage
                 title="Maobi"
-                subtitleText="Nehme den Stift in die Hand und schreibe nun"
-                subtitleText2="das Wort in der Maobi Schrift nach"
+                subtitleText="Pick up the brush and write the word in Maobi script."
+                subtitleText2=""
                 imagePath={SchreibuebungChinesisch}
               />
             </>
@@ -611,13 +695,19 @@ function App() {
             backgroundImage={papyrusImg}
           />
         );
-      case 'Schriftwandel':
+      case 'Evolution of Script':
         if (activeSubItem === 'machingGame') {
           return (
             <PageWrapper
-              pageHint="Der Kalligraf"
+              pageHint="The Calligrapher"
               showHint={true}
             >
+              {/* Audio Element for The Calligrapher */}
+              <audio
+                ref={modernVStraditionellAudioRef}
+                src={modernVStraditionellAudio}
+                onEnded={handleModernVStraditionellAudioEnded}
+              />
               <div style={{
                 display: 'flex',
                 justifyContent: 'center',
@@ -631,10 +721,10 @@ function App() {
                   alt="Traditional Calligraphy"
                   style={{
                     maxWidth: '45%',
-                    maxHeight: '80vh',
+                    maxHeight: '75vh',
                     objectFit: 'contain',
                     borderRadius: '10px',
-                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+                    //boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
                   }}
                 />
                 <img
@@ -642,10 +732,10 @@ function App() {
                   alt="Modern Calligraphy"
                   style={{
                     maxWidth: '45%',
-                    maxHeight: '80vh',
+                    maxHeight: '75vh',
                     objectFit: 'contain',
                     borderRadius: '10px',
-                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+                    //boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
                   }}
                 />
               </div>
@@ -675,9 +765,15 @@ function App() {
         // Default: Moderne Kalligrafie
         return (
           <PageWrapper
-            pageHint="Moderne Kalligraphie"
+            pageHint="Modern Calligraphy"
             showHint={true}
           >
+            {/* Audio Element for Modern Calligraphy */}
+            <audio
+              ref={modernAudioRef}
+              src={modernAudio}
+              onEnded={handleModernAudioEnded}
+            />
             <div style={{
               height: '600px',
               width: '100%',
@@ -773,7 +869,7 @@ function App() {
             </div>
           </PageWrapper>
         );
-      case 'Puzzle':
+      case 'Maching Game':
         return (
           <PageWrapper
             pageHint=""

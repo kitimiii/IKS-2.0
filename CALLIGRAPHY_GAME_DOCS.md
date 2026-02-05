@@ -141,7 +141,7 @@ Das Grid passt sich automatisch an:
 ```jsx
 import CalligraphyGame from './components/CalligraphyGame';
 
-// In der Puzzle-Seite:
+// In der Maching Game-Seite:
 case 'Maching Game':
   return (
     <PageWrapper pageHint="" showHint={false}>
