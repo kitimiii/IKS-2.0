@@ -13,7 +13,7 @@ import CalligraphyGame from './components/CalligraphyGame';
 // Audio files
 import introAudio from './assets/Audios/Intro.mov';
 import definitionAudio from './assets/Audios/Definiton.mov';
-import grunduebungAudio from './assets/Audios/Basic exercise.mov';
+import grunduebungAudio from './assets/Audios/Grundübung.mov';
 import federkielAudio from './assets/Audios/Federkiel.mov';
 import federkiel2Audio from './assets/Audios/Federkiel2.mov';
 import maobiAudio from './assets/Audios/Maobi.mov';
