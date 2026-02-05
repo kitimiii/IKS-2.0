@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import './App.css';
 import Dock from './components/Dock';
 import HeroPage from './pages/HeroPage';
@@ -9,6 +9,15 @@ import TheoryPage from './components/TheoryPage';
 import PracticePage from './components/PracticePage';
 import CalligrapherTable from './components/CalligrapherTable';
 import CalligraphyGame from './components/CalligraphyGame';
+
+// Audio files
+import introAudio from './assets/Audios/Intro.mov';
+import definitionAudio from './assets/Audios/Definiton.mov';
+import grunduebungAudio from './assets/Audios/Grundübung.mov';
+import federkielAudio from './assets/Audios/Federkiel.mov';
+import federkiel2Audio from './assets/Audios/Federkiel2.mov';
+import maobiAudio from './assets/Audios/Maobi.mov';
+import maobi2Audio from './assets/Audios/Maobi2.mov';
 
 // Dock Icon Bilder
 import HausBraun from './assets/Images/HausBraun.PNG';
@@ -46,6 +55,11 @@ import zitatImg from './assets/slider-image2/zitat.jpg';
 // Bilder für Practice-Seiten
 import SchreibuebungDeutsch from './assets/Images/SchreibuebungDeutsch.PNG';
 import SchreibuebungArabisch from './assets/Images/SchreibuebungArabisch.PNG';
+import SchreibuebungChinesisch from './assets/Images/Schreibübung_chinesisch.png';
+
+// Bilder für Der Kalligraf Seite
+import modernImg from './assets/Images/modern.png';
+import traditionalImg from './assets/Images/traditional.png';
 
 const moderneKalligrafieItems = [
   { image: quoteImg, text: 'text' },
@@ -67,6 +81,13 @@ function App() {
   const [activeSubItem, setActiveSubItem] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null); // Now stores image number (1-12) instead of boolean
   const [selectedModerneImage, setSelectedModerneImage] = useState(null);
+  const introAudioRef = useRef(null);
+  const definitionAudioRef = useRef(null);
+  const grunduebungAudioRef = useRef(null);
+  const federkielAudioRef = useRef(null);
+  const federkiel2AudioRef = useRef(null);
+  const maobiAudioRef = useRef(null);
+  const maobi2AudioRef = useRef(null);
 
   // Stable callbacks for CircularGallery - defined at top level
   const handleImageClick = useCallback((imageIndex) => {
@@ -87,6 +108,121 @@ function App() {
     // Update popup content only if popup is already open
     setSelectedModerneImage(prev => prev !== null ? imageIndex : null);
   }, []);
+
+  // Auto-play audio based on active page
+  useEffect(() => {
+    // Home page - Intro audio (loops)
+    if (activeItem === 'Home' && introAudioRef.current) {
+      introAudioRef.current.play().catch(error => {
+        console.log('Auto-play prevented by browser:', error);
+      });
+    } else if (introAudioRef.current) {
+      introAudioRef.current.pause();
+      introAudioRef.current.currentTime = 0;
+    }
+
+    // Definition page
+    if (activeItem === 'Definition' && definitionAudioRef.current) {
+      definitionAudioRef.current.play().catch(error => {
+        console.log('Auto-play prevented by browser:', error);
+      });
+    } else if (definitionAudioRef.current) {
+      definitionAudioRef.current.pause();
+      definitionAudioRef.current.currentTime = 0;
+    }
+
+    // Grundübung page
+    if (activeItem === 'Grundübung' && grunduebungAudioRef.current) {
+      grunduebungAudioRef.current.play().catch(error => {
+        console.log('Auto-play prevented by browser:', error);
+      });
+    } else if (grunduebungAudioRef.current) {
+      grunduebungAudioRef.current.pause();
+      grunduebungAudioRef.current.currentTime = 0;
+    }
+
+    // Federkiel theory page
+    if (activeItem === 'Federkiel' && activeSubItem !== 'practice' && federkielAudioRef.current) {
+      federkielAudioRef.current.play().catch(error => {
+        console.log('Auto-play prevented by browser:', error);
+      });
+    } else if (federkielAudioRef.current) {
+      federkielAudioRef.current.pause();
+      federkielAudioRef.current.currentTime = 0;
+    }
+
+    // Federkiel practice page
+    if (activeItem === 'Federkiel' && activeSubItem === 'practice' && federkiel2AudioRef.current) {
+      federkiel2AudioRef.current.play().catch(error => {
+        console.log('Auto-play prevented by browser:', error);
+      });
+    } else if (federkiel2AudioRef.current) {
+      federkiel2AudioRef.current.pause();
+      federkiel2AudioRef.current.currentTime = 0;
+    }
+
+    // Maobi theory page
+    if (activeItem === 'Maobi' && activeSubItem !== 'practice' && maobiAudioRef.current) {
+      maobiAudioRef.current.play().catch(error => {
+        console.log('Auto-play prevented by browser:', error);
+      });
+    } else if (maobiAudioRef.current) {
+      maobiAudioRef.current.pause();
+      maobiAudioRef.current.currentTime = 0;
+    }
+
+    // Maobi practice page
+    if (activeItem === 'Maobi' && activeSubItem === 'practice' && maobi2AudioRef.current) {
+      maobi2AudioRef.current.play().catch(error => {
+        console.log('Auto-play prevented by browser:', error);
+      });
+    } else if (maobi2AudioRef.current) {
+      maobi2AudioRef.current.pause();
+      maobi2AudioRef.current.currentTime = 0;
+    }
+  }, [activeItem, activeSubItem]);
+
+  const handleIntroAudioEnded = () => {
+    // Replay after 5 seconds for Home page
+    setTimeout(() => {
+      if (introAudioRef.current && activeItem === 'Home') {
+        introAudioRef.current.currentTime = 0;
+        introAudioRef.current.play().catch(error => {
+          console.log('Replay prevented:', error);
+        });
+      }
+    }, 5000);
+  };
+
+  const handleDefinitionAudioEnded = () => {
+    // Do nothing - audio plays only once
+    console.log('Definition audio ended');
+  };
+
+  const handleGrunduebungAudioEnded = () => {
+    // Do nothing - audio plays only once
+    console.log('Grundübung audio ended');
+  };
+
+  const handleFederkielAudioEnded = () => {
+    // Do nothing - audio plays only once
+    console.log('Federkiel audio ended');
+  };
+
+  const handleFederkiel2AudioEnded = () => {
+    // Do nothing - audio plays only once
+    console.log('Federkiel2 audio ended');
+  };
+
+  const handleMaobiAudioEnded = () => {
+    // Do nothing - audio plays only once
+    console.log('Maobi audio ended');
+  };
+
+  const handleMaobi2AudioEnded = () => {
+    // Do nothing - audio plays only once
+    console.log('Maobi2 audio ended');
+  };
 
   const handleDockItemClick = (label, index) => {
     // Reset popup states when changing pages
@@ -171,9 +307,17 @@ function App() {
     switch (activeItem) {
       case 'Home':
         return (
-          <HeroPage
-            onPlayClick={handlePlayClick}
-          />
+          <>
+            {/* Audio Element for Home */}
+            <audio
+              ref={introAudioRef}
+              src={introAudio}
+              onEnded={handleIntroAudioEnded}
+            />
+            <HeroPage
+              onPlayClick={handlePlayClick}
+            />
+          </>
         );
       case 'Definition':
         // Popup-Texte für jedes Bild
@@ -200,6 +344,13 @@ function App() {
             pageHint="kleiner Einblick was die Page beinhaltet…"
             showHint={true}
           >
+            {/* Audio Element for Definition */}
+            <audio
+              ref={definitionAudioRef}
+              src={definitionAudio}
+              onEnded={handleDefinitionAudioEnded}
+            />
+            
             <div style={{
               height: '600px',
               width: '100%',
@@ -300,32 +451,55 @@ function App() {
             pageHint=""
             showHint={false}
           >
+            {/* Audio Element for Grundübung */}
+            <audio
+              ref={grunduebungAudioRef}
+              src={grunduebungAudio}
+              onEnded={handleGrunduebungAudioEnded}
+            />
+            
             <DrawingCanvas />
           </PageWrapper>
         );
       case 'Federkiel':
         if (activeSubItem === 'practice') {
           return (
-            <PracticePage
-              title="Federkiel"
-              subtitleText="Nehme den Stift in die Hand und schreibe nun"
-              subtitleText2="das Wort in der Federkiel Schrift nach"
-              imagePath={SchreibuebungDeutsch}
-            />
+            <>
+              {/* Audio Element for Federkiel Practice */}
+              <audio
+                ref={federkiel2AudioRef}
+                src={federkiel2Audio}
+                onEnded={handleFederkiel2AudioEnded}
+              />
+              <PracticePage
+                title="Federkiel"
+                subtitleText="Nehme den Stift in die Hand und schreibe nun"
+                subtitleText2="das Wort in der Federkiel Schrift nach"
+                imagePath={SchreibuebungDeutsch}
+              />
+            </>
           );
         }
         return (
           <TheoryPage
             title="Federkiel"
             infoContent={
-              <ul>
-                <li>Made from feathers of goose, swan, or turkey</li>
-                <li>Standard writing tool in medieval Europe</li>
-                <li>Tip needed regular trimming to stay sharp</li>
-                <li>Suitable for fine lines and detailed ornamentation</li>
-                <li>Used with ink made from soot or oak galls</li>
-                <li>Important in monasteries and universities for manuscripts and documents.</li>
-              </ul>
+              <>
+                {/* Audio Element for Federkiel */}
+                <audio
+                  ref={federkielAudioRef}
+                  src={federkielAudio}
+                  onEnded={handleFederkielAudioEnded}
+                />
+                <ul>
+                  <li>Made from feathers of goose, swan, or turkey</li>
+                  <li>Standard writing tool in medieval Europe</li>
+                  <li>Tip needed regular trimming to stay sharp</li>
+                  <li>Suitable for fine lines and detailed ornamentation</li>
+                  <li>Used with ink made from soot or oak galls</li>
+                  <li>Important in monasteries and universities for manuscripts and documents.</li>
+                </ul>
+              </>
             }
             isVisible={activeItem === 'Federkiel' && activeSubItem !== 'practice'}
             // 3D Model settings
@@ -377,25 +551,42 @@ function App() {
       case 'Maobi':
         if (activeSubItem === 'practice') {
           return (
-            <PracticePage
-              title="Maobi"
-              subtitleText="Nehme den Stift in die Hand und schreibe nun"
-              subtitleText2="das Wort in der Maobi Schrift nach"
-            />
+            <>
+              {/* Audio Element for Maobi Practice */}
+              <audio
+                ref={maobi2AudioRef}
+                src={maobi2Audio}
+                onEnded={handleMaobi2AudioEnded}
+              />
+              <PracticePage
+                title="Maobi"
+                subtitleText="Nehme den Stift in die Hand und schreibe nun"
+                subtitleText2="das Wort in der Maobi Schrift nach"
+                imagePath={SchreibuebungChinesisch}
+              />
+            </>
           );
         }
         return (
           <TheoryPage
             title="Maobi"
             infoContent={
-              <ul>
-                <li>Traditional brush used in China, Japan, and Korea</li>
-                <li>Handle made of bamboo or wood</li>
-                <li>Tip made from animal hair (e.g., goat, wolf, weasel)</li>
-                <li>Very flexible: creates thick and thin lines in one stroke</li>
-                <li>Used together with ink and an ink stone</li>
-                <li>Calligraphy seen as a major art form and reflection of character</li>
-              </ul>
+              <>
+                {/* Audio Element for Maobi Theory */}
+                <audio
+                  ref={maobiAudioRef}
+                  src={maobiAudio}
+                  onEnded={handleMaobiAudioEnded}
+                />
+                <ul>
+                  <li>Traditional brush used in China, Japan, and Korea</li>
+                  <li>Handle made of bamboo or wood</li>
+                  <li>Tip made from animal hair (e.g., goat, wolf, weasel)</li>
+                  <li>Very flexible: creates thick and thin lines in one stroke</li>
+                  <li>Used together with ink and an ink stone</li>
+                  <li>Calligraphy seen as a major art form and reflection of character</li>
+                </ul>
+              </>
             }
             isVisible={activeItem === 'Maobi' && activeSubItem !== 'practice'}
             // 3D Model settings
@@ -415,7 +606,37 @@ function App() {
               pageHint="Der Kalligraf"
               showHint={true}
             >
-              <CalligrapherTable />
+              <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '40px',
+                padding: '40px',
+                height: '100%'
+              }}>
+                <img 
+                  src={traditionalImg} 
+                  alt="Traditional" 
+                  style={{
+                    maxWidth: '45%',
+                    maxHeight: '80vh',
+                    objectFit: 'contain',
+                    borderRadius: '10px',
+                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+                  }}
+                />
+                <img 
+                  src={modernImg} 
+                  alt="Modern" 
+                  style={{
+                    maxWidth: '45%',
+                    maxHeight: '80vh',
+                    objectFit: 'contain',
+                    borderRadius: '10px',
+                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+                  }}
+                />
+              </div>
             </PageWrapper>
           );
         }

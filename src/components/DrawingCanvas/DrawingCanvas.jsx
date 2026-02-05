@@ -17,23 +17,23 @@ const CONFIG = {
 const BRUSHES = {
     feder: {
         name: 'Federkiel',
-        baseSize: 2,         // Dünnere Basisstärke
-        minSize: 0.5,
-        maxSize: 4,
+        baseSize: 5,        
+        minSize: 1,
+        maxSize: 5,
         pressureSensitivity: 0.8,
     },
     pinsel: {
         name: 'Maobi',
-        baseSize: 6,         // Dickere Basisstärke
-        minSize: 3,
-        maxSize: 12,
+        baseSize: 5,         
+        minSize: 2,
+        maxSize: 5,
         pressureSensitivity: 1.2,
     },
     qalam: {
         name: 'Qalam',
-        baseSize: 2,         // Mittlere Basisstärke
+        baseSize: 5,        
         minSize: 1,
-        maxSize: 8,
+        maxSize: 5,
         pressureSensitivity: 0.8,
     }
 };

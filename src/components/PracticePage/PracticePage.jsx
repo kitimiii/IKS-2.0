@@ -16,8 +16,8 @@ const CONFIG = {
 // Pinsel-Konfiguration (Standard: Feder)
 const BRUSH = {
     baseSize: 4,
-    minSize: 1,
-    maxSize: 15,
+    minSize: 5,
+    maxSize: 20,
     pressureSensitivity: 0.8,
 };
 
@@ -137,18 +137,21 @@ const PracticePage = ({
             // Geschwindigkeit in Pixel pro Millisekunde
             const velocity = distance / timeDelta;
             
-            // Geschwindigkeitsschwellenwerte (anpassbar)
-            const slowVelocity = 0.3;  // Langsam = unter 0.3 px/ms
-            const fastVelocity = 2.0;  // Schnell = über 2.0 px/ms
+            // Viel größerer Geschwindigkeitsbereich für mehr Mittelwerte
+            const slowVelocity = 0.05;  // Sehr langsam = maximale Dicke
+            const fastVelocity = 5.0;   // Sehr schnell = minimale Dicke
             
-            // Normalisiere Geschwindigkeit (0 = langsam/dick, 1 = schnell/dünn)
+            // Normalisiere Geschwindigkeit (0 = langsam, 1 = schnell)
             let normalizedVelocity = (velocity - slowVelocity) / (fastVelocity - slowVelocity);
             normalizedVelocity = Math.max(0, Math.min(1, normalizedVelocity));
             
-            // Invertiere für dickere Striche bei langsamer Bewegung
-            const thickness = 1 - normalizedVelocity;
+            // Sanfterer Übergang mit niedrigerem Exponenten für mehr Mittelwerte
+            const exponentialFactor = Math.pow(normalizedVelocity, 0.7);
             
-            // Interpoliere zwischen minSize (schnell) und maxSize (langsam)
+            // Invertiere für dickere Striche bei langsamer Bewegung (1 = dick, 0 = dünn)
+            const thickness = 1 - exponentialFactor;
+            
+            // Interpoliere zwischen minSize und maxSize mit sanfter Kurve
             const newSize = BRUSH.minSize + (BRUSH.maxSize - BRUSH.minSize) * thickness;
             
             return newSize;

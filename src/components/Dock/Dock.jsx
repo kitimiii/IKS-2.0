@@ -28,7 +28,7 @@ const subItemsConfig = {
 function DockSubItem({ text, onClick, baseItemSize, isActive }) {
     // ÄNDERN SIE DIESEN WERT, UM DIE GRÖSSE DER SUB-ITEMS ZU ÄNDERN
     // 0.5 bedeutet die Hälfte der Dock-Item-Größe. 0.8 wäre 80%, etc.
-    const SUB_ITEM_SCALE = 0.9;
+    const SUB_ITEM_SCALE = 1.1;
     const subItemSize = baseItemSize * SUB_ITEM_SCALE;
 
     return (
