@@ -60,7 +60,7 @@ import zitatImg from './assets/slider-image2/zitat.jpg';
 // Bilder für Practice-Seiten
 import SchreibuebungDeutsch from './assets/Images/SchreibuebungDeutsch.PNG';
 import SchreibuebungArabisch from './assets/Images/SchreibuebungArabisch.PNG';
-import SchreibuebungChinesisch from './assets/Images/Schreibübung_chinesisch.png';
+import SchreibuebungChinesisch from './assets/Images/Schreibübung_chinesisch.svg';
 
 // Bilder für Der Kalligraf Seite
 import modernImg from './assets/Images/modern.png';
