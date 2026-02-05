@@ -5,23 +5,23 @@ import { Children, cloneElement, useEffect, useMemo, useRef, useState } from 're
 
 import './Dock.css';
 
-// Sub-Items für die speziellen Dock Items (Federkiel, Qualam, Maobi, Schriftwandel)
+// Sub-Items für die speziellen Dock Items (Feather quill, Qualam, Maobi, Schriftwandel)
 const subItemsConfig = {
-    'Federkiel': [
-        { text: 'Theory', id: 'federkiel-sub-1' },
-        { text: 'Practice', id: 'federkiel-sub-2' }
+    'Feather quill': [
+        { text: 'Theory', id: 'Feather quill-sub-1' },
+        { text: 'Practice', id: 'Feather quill-sub-2' }
     ],
     'Qualam': [
-        { text: 'Theory', id: 'qualam-sub-1' },
-        { text: 'Practice', id: 'qualam-sub-2' }
+        { text: 'Theory', id: 'Qualam-sub-1' },
+        { text: 'Practice', id: 'Qualam-sub-2' }
     ],
     'Maobi': [
         { text: 'Theory', id: 'maobi-sub-1' },
         { text: 'Practice', id: 'maobi-sub-2' }
     ],
-    'Schriftwandel': [
-        { text: 'Moderne Kalligrafie', id: 'schriftwandel-sub-1' },
-        { text: 'Der Kalligraf', id: 'schriftwandel-sub-2' }
+    'Evolution of Script': [
+        { text: 'Modern Calligraphy', id: 'Evolution of Script-sub-1' },
+        { text: 'The Calligrapher', id: 'Evolution of Script-sub-2' }
     ]
 };
 
@@ -77,13 +77,13 @@ function DockItem({ children, className = '', onClick, mouseX, spring, distance,
         if (!activeSubItem) return false;
 
         // Schriftwandel Cases
-        if (activeSubItem === 'moderneKalligrafie' && id === 'schriftwandel-sub-1') return true;
-        if (activeSubItem === 'machingGame' && id === 'schriftwandel-sub-2') return true;
+        if (activeSubItem === 'moderneKalligrafie' && id === 'Evolution of Script-sub-1') return true;
+        if (activeSubItem === 'machingGame' && id === 'Evolution of Script-sub-2') return true;
 
-        // Theory/Practice Cases (Federkiel, Qualam, Maobi)
+        // Theory/Practice Cases (Feather quill, Qualam, Maobi)
         // Check contents but exclude schriftwandel to be safe
-        if (activeSubItem === 'theory' && id.includes('sub-1') && !id.includes('schriftwandel')) return true;
-        if (activeSubItem === 'practice' && id.includes('sub-2') && !id.includes('schriftwandel')) return true;
+        if (activeSubItem === 'theory' && id.includes('sub-1') && !id.includes('Evolution of Script')) return true;
+        if (activeSubItem === 'practice' && id.includes('sub-2') && !id.includes('Evolution of Script')) return true;
 
         return false;
     };

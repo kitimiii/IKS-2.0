@@ -5,8 +5,8 @@ import InfotextBox from '../InfotextBox';
 import './TheoryPage.css';
 
 const TheoryPage = ({
-    // Page title - e.g. "Federkiel", "Qualam", "Maobi"
-    title = 'Federkiel',
+    // Page title - e.g. "Feather quill", "Qualam", "Maobi"
+    title = 'Feather quill',
     // Info text for the InfotextBox - customizable
     infoText = 'Das ist die .... Werkzeug um die ... Schrift auszuführen',
     // Info content for InfotextBox (JSX) - takes precedence over infoText

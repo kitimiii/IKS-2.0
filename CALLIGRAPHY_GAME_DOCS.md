@@ -142,7 +142,7 @@ Das Grid passt sich automatisch an:
 import CalligraphyGame from './components/CalligraphyGame';
 
 // In der Puzzle-Seite:
-case 'Puzzle':
+case 'Maching Game':
   return (
     <PageWrapper pageHint="" showHint={false}>
       <CalligraphyGame />

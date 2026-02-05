@@ -78,7 +78,7 @@ function App() {
     setSelectedImage(prev => prev !== null ? imageIndex : null);
   }, []);
 
-  // Callbacks for Moderne Kalligrafie (Schriftwandel)
+  // Callbacks for Moderne Kalligrafie ()
   const handleModerneImageClick = useCallback((imageIndex) => {
     setSelectedModerneImage(imageIndex);
   }, []);
@@ -92,13 +92,13 @@ function App() {
     // Reset popup states when changing pages
     setSelectedImage(null);
     setSelectedModerneImage(null);
-    
-    // For Federkiel, Qualam, Maobi - automatically navigate to Theory sub-page
-    if (label === 'Federkiel' || label === 'Qualam' || label === 'Maobi') {
+
+    // For Feather quill, Qualam, Maobi - automatically navigate to Theory sub-page
+    if (label === 'Feather quill' || label === 'Qualam' || label === 'Maobi') {
       setActiveItem(label);
       setActiveSubItem('theory');
       console.log(`Navigiere direkt zu: ${label} Theory`);
-    } else if (label === 'Schriftwandel') {
+    } else if (label === '') {
       setActiveItem(label);
       setActiveSubItem('moderneKalligrafie');
       console.log(`Navigiere direkt zu: ${label} Moderne Kalligrafie`);
@@ -112,9 +112,9 @@ function App() {
   const handleSubItemClick = (subItemId) => {
     console.log(`Sub-Item geklickt: ${subItemId}`);
     // Handle sub-item navigation
-    if (subItemId.includes('schriftwandel-sub-1')) {
+    if (subItemId.includes('Evolution of Script-sub-1')) {
       setActiveSubItem('moderneKalligrafie');
-    } else if (subItemId.includes('schriftwandel-sub-2')) {
+    } else if (subItemId.includes('Evolution of Script-sub-2')) {
       setActiveSubItem('machingGame');
     } else if (subItemId.includes('sub-1')) {
       // General theory for other items
@@ -135,12 +135,12 @@ function App() {
       label: 'Definition'
     },
     {
-      icon: <img src={activeItem === 'Grundübung' ? ÜbungBeige : ÜbungBraun} alt="Grundübung" style={{ width: '60px', height: '60px' }} />,
-      label: 'Grundübung'
+      icon: <img src={activeItem === 'Basic exercise' ? ÜbungBeige : ÜbungBraun} alt="Basic exercise" style={{ width: '60px', height: '60px' }} />,
+      label: 'Basic exercise'
     },
     {
-      icon: <img src={activeItem === 'Federkiel' ? FederBeige : FederBraun} alt="Federkiel" style={{ width: '60px', height: '60px' }} />,
-      label: 'Federkiel'
+      icon: <img src={activeItem === 'Feather quill' ? FederBeige : FederBraun} alt="Feather quill" style={{ width: '60px', height: '60px' }} />,
+      label: 'Feather quill'
     },
     {
       icon: <img src={activeItem === 'Qualam' ? QalamBeige : QalamBraun} alt="Qualam" style={{ width: '60px', height: '60px' }} />,
@@ -151,12 +151,12 @@ function App() {
       label: 'Maobi'
     },
     {
-      icon: <img src={activeItem === 'Schriftwandel' ? PaperBeige : PaperBraun} alt="Schriftwandel" style={{ width: '60px', height: '60px' }} />,
-      label: 'Schriftwandel'
+      icon: <img src={activeItem === 'Evolution of Script' ? PaperBeige : PaperBraun} alt="Evolution of Script" style={{ width: '60px', height: '60px' }} />,
+      label: 'Evolution of Script'
     },
     {
-      icon: <img src={activeItem === 'Puzzle' ? PuzzleBeige : PuzzleBraun} alt="Puzzle" style={{ width: '60px', height: '60px' }} />,
-      label: 'Puzzle'
+      icon: <img src={activeItem === 'Maching Game' ? PuzzleBeige : PuzzleBraun} alt="Maching Game" style={{ width: '60px', height: '60px' }} />,
+      label: 'Maching Game'
     },
   ];
 
@@ -197,7 +197,7 @@ function App() {
 
         return (
           <PageWrapper
-            pageHint="kleiner Einblick was die Page beinhaltet…"
+            pageHint="Traditional Calligraphy"
             showHint={true}
           >
             <div style={{
@@ -294,7 +294,7 @@ function App() {
             </div>
           </PageWrapper>
         );
-      case 'Grundübung':
+      case 'Basic exercise':
         return (
           <PageWrapper
             pageHint=""
@@ -303,20 +303,20 @@ function App() {
             <DrawingCanvas />
           </PageWrapper>
         );
-      case 'Federkiel':
+      case 'Feather quill':
         if (activeSubItem === 'practice') {
           return (
             <PracticePage
-              title="Federkiel"
-              subtitleText="Nehme den Stift in die Hand und schreibe nun"
-              subtitleText2="das Wort in der Federkiel Schrift nach"
+              title="Feather quill"
+              subtitleText1="Pick up the pen and write the word in Feather quill script."
+              subtitleText2=""
               imagePath={SchreibuebungDeutsch}
             />
           );
         }
         return (
           <TheoryPage
-            title="Federkiel"
+            title="Feather quill"
             infoContent={
               <ul>
                 <li>Made from feathers of goose, swan, or turkey</li>
@@ -327,7 +327,7 @@ function App() {
                 <li>Important in monasteries and universities for manuscripts and documents.</li>
               </ul>
             }
-            isVisible={activeItem === 'Federkiel' && activeSubItem !== 'practice'}
+            isVisible={activeItem === 'Feather quill' && activeSubItem !== 'practice'}
             // 3D Model settings
             modelPath="/models/Stift_platzhalter/scene.gltf"
             modelContainerWidth={400}
@@ -343,8 +343,8 @@ function App() {
           return (
             <PracticePage
               title="Qualam"
-              subtitleText="Nehme den Stift in die Hand und schreibe nun"
-              subtitleText2="das Wort in der Qualam Schrift nach"
+              subtitleText="Pick up the pen and write the word in Qualam script."
+              subtitleText2=""
               imagePath={SchreibuebungArabisch}
             />
           );
@@ -379,8 +379,8 @@ function App() {
           return (
             <PracticePage
               title="Maobi"
-              subtitleText="Nehme den Stift in die Hand und schreibe nun"
-              subtitleText2="das Wort in der Maobi Schrift nach"
+              subtitleText="Pick up the pen and write the word in Maobi script."
+              subtitleText2=""
             />
           );
         }
@@ -408,18 +408,18 @@ function App() {
             infoBoxHeight={400}
           />
         );
-      case 'Schriftwandel':
+      case 'Evolution of Script':
         if (activeSubItem === 'machingGame') {
           return (
             <PageWrapper
-              pageHint="Der Kalligraf"
+              pageHint="The Calligrapher"
               showHint={true}
             >
               <CalligrapherTable />
             </PageWrapper>
           );
         }
-        
+
         // Popup-Texte für jedes Bild in Moderne Kalligrafie
         const getModernePopupText = (imageNumber) => {
           const popupTexts = {
@@ -438,11 +438,11 @@ function App() {
           };
           return popupTexts[imageNumber] || 'Platzhalter';
         };
-        
+
         // Default: Moderne Kalligrafie
         return (
           <PageWrapper
-            pageHint="Moderne Kalligraphie"
+            pageHint="Modern Calligraphy"
             showHint={true}
           >
             <div style={{
@@ -540,7 +540,7 @@ function App() {
             </div>
           </PageWrapper>
         );
-      case 'Puzzle':
+      case 'Maching Game':
         return (
           <PageWrapper
             pageHint=""
