@@ -44,7 +44,7 @@ import PaperBeige from './assets/Images/PaperBeige.PNG';
 import PuzzleBeige from './assets/Images/PuzzleBeige.PNG';
 
 // Bilder für Moderne Kalligrafie
-import quoteImg from './assets/slider-image2/Quote.jpg';
+import quoteImg from './assets/Images/modern_Calligraphy.jpg';
 import brushImg from './assets/slider-image2/brush.jpg';
 import courseImg from './assets/slider-image2/course.png';
 import einladungImg from './assets/slider-image2/einladung.jpg';
@@ -746,18 +746,18 @@ function App() {
         // Popup-Texte für jedes Bild in Moderne Kalligrafie
         const getModernePopupText = (imageNumber) => {
           const popupTexts = {
-            1: 'Platzhalter 1',
-            2: 'Platzhalter 2',
-            3: 'Platzhalter 3',
-            4: 'Platzhalter 4',
-            5: 'Platzhalter 5',
-            6: 'Platzhalter 6',
-            7: 'Platzhalter 7',
-            8: 'Platzhalter 8',
-            9: 'Platzhalter 9',
-            10: 'Platzhalter 10',
-            11: 'Platzhalter 11',
-            12: 'Platzhalter 12'
+            1: ' This is an example of modern calligraphy. The letters are written in fluid, continuous strokes with clear contrast between thick downstrokes and thin upstrokes.',
+            2: 'This is brush lettering, created with brush pens that produce thick and thin strokes depending on pressure.',
+            3: 'Participants at a Japanese calligraphy workshop sit around a table as they use brushes and ink to practice writing Kanji characters on paper.',
+            4: 'Cards being handwritten with elegant calligraphy using a pointed pen and ink.',
+            5: 'Flowing, elegant calligraphy letters drawn by hand, showcasing artistic strokes and stylized curves.',
+            6: 'A digital tablet screen, showing beautifully crafted calligraphic lettering being drawn by hand in a digital art app.',
+            7: 'A digital iPad screen showing hand drawn calligraphy letters being created within a visible grid.',
+            8: 'A neatly arranged set of basic pointed calligraphy tools displayed together as a complete beginner’s calligraphy supplies bundle.',
+            9: 'A clear acrylic decorative sign with elegant Arabic calligraphy embellished with subtle floral or ornamental accents, styled as a wedding keepsake.',
+            10: 'A group of people at a calligraphy workshop practicing the Unziale script with broad nib pens and ink on paper.',
+            11: 'A man drawing on a large wall covered with bold, artistic calligraphic lettering.',
+            12: 'A calligraphic handwritten love letter with the quote: “Love that is not madness is not love.” '
           };
           return popupTexts[imageNumber] || 'Platzhalter';
         };
@@ -857,7 +857,7 @@ function App() {
 
                   <p style={{
                     fontFamily: 'Sedan, serif',
-                    fontSize: '1em',
+                    fontSize: '0.9em',
                     color: '#61554B',
                     textAlign: 'center',
                     margin: 0
