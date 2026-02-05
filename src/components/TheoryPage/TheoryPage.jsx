@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PageWrapper from '../PageWrapper';
 import Model3DViewer from '../Model3DViewer';
-import InfotextBox from '../InfotextBox';
 import './TheoryPage.css';
 
 const TheoryPage = ({
@@ -21,6 +20,7 @@ const TheoryPage = ({
     // InfotextBox settings - all customizable
     infoBoxHeight = 400,
     infoBoxWidth = null,
+    backgroundImage = null,
     // Visibility control for animations
     isVisible = true
 }) => {
@@ -61,17 +61,54 @@ const TheoryPage = ({
                     />
                 </div>
 
-                {/* InfotextBox - positioned right side */}
-                <InfotextBox
-                    isVisible={showInfoBox}
-                    infoText={infoText}
-                    infoContent={infoContent}
-                    height={infoBoxHeight}
-                    width={infoBoxWidth}
-                    position="right"
-                    colors={['#E8E4E0', '#D4CEC8']}
-                    accentColor="#61554B"
-                />
+                {/* Papyrus Bild mit Text - positioned right side */}
+                {backgroundImage && (
+                    <div 
+                        className="theory-text-container"
+                        style={{
+                            position: 'relative',
+                            width: infoBoxWidth || 450,
+                            height: infoBoxHeight,
+                            opacity: showInfoBox ? 1 : 0,
+                            transform: showInfoBox ? 'translateX(0)' : 'translateX(100px)',
+                            transition: 'all 0.8s ease-out'
+                        }}
+                    >
+                        <img 
+                            src={backgroundImage} 
+                            alt="Papyrus" 
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'contain',
+                                borderRadius: '12px'
+                            }}
+                        />
+                        <div 
+                            style={{
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                width: '100%',
+                                height: '100%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                padding: '2em'
+                            }}
+                        >
+                            <div style={{
+                                fontSize: '1.1em',
+                                color: '#61554B',
+                                fontFamily: 'Sedan, serif',
+                                lineHeight: 1.6,
+                                textAlign: 'left'
+                            }}>
+                                {infoContent || infoText}
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </PageWrapper>
     );

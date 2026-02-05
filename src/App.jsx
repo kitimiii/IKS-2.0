@@ -61,6 +61,9 @@ import SchreibuebungChinesisch from './assets/Images/Schreibübung_chinesisch.sv
 import traditionalImg from './assets/Images/traditional.png';
 import modernImg from './assets/Images/modern.png';
 
+// Hintergrundbild für Federkiel Theory
+import papyrusImg from './assets/Images/Papyrus.png';
+
 const moderneKalligrafieItems = [
   { image: quoteImg, text: 'text' },
   { image: brushImg, text: 'text' },
@@ -497,20 +500,22 @@ function App() {
                   <li>Tip needed regular trimming to stay sharp</li>
                   <li>Suitable for fine lines and detailed ornamentation</li>
                   <li>Used with ink made from soot or oak galls</li>
-                  <li>Important in monasteries and universities for manuscripts and documents.</li>
+                  <li>Important in monasteries and universities for <br /> manuscripts and documents.</li>
                 </ul>
               </>
             }
             isVisible={activeItem === 'Federkiel' && activeSubItem !== 'practice'}
             // 3D Model settings
             modelPath="/models/Featherquill_3D/scene.gltf"
-            modelContainerWidth={400}
-            modelContainerHeight={400}
+            modelContainerWidth={500}
+            modelContainerHeight={500}
             baseRotation={[0, 0, 0]}
             autoRotateSpeed={0.35}
             modelScale={0.4}
             // InfotextBox settings 
-            infoBoxHeight={400}
+            infoBoxHeight={500}
+            infoBoxWidth={800}
+            backgroundImage={papyrusImg}
           />
         );
       case 'Qalam ':
@@ -535,18 +540,20 @@ function App() {
                 <li>Ideal for geometric writing styles</li>
                 <li>Most important tool in Islamic calligraphy</li>
                 <li>Often used for copying the Quran</li>
-                <li>Script held high cultural and spiritual importance because images were avoided</li>
+                <li>Script held high cultural and spiritual importance <br /> because images were avoided</li>
               </ul>
             }
             isVisible={activeItem === 'Qalam ' && activeSubItem !== 'practice'}
             // 3D Model settings
             modelPath="/models/Stift_platzhalter/scene.gltf"
-            modelContainerWidth={400}
-            modelContainerHeight={400}
+            modelContainerWidth={500}
+            modelContainerHeight={500}
             baseRotation={[0, 0, 0]}
             autoRotateSpeed={0.35}
             // InfotextBox settings
-            infoBoxHeight={400}
+            infoBoxHeight={500}
+            infoBoxWidth={800}
+            backgroundImage={papyrusImg}
           />
         );
       case 'Maobi':
@@ -585,19 +592,21 @@ function App() {
                   <li>Tip made from animal hair (e.g., goat, wolf, weasel)</li>
                   <li>Very flexible: creates thick and thin lines in one stroke</li>
                   <li>Used together with ink and an ink stone</li>
-                  <li>Calligraphy seen as a major art form and reflection of character</li>
+                  <li>Calligraphy seen as a major art form and reflection <br />of character</li>
                 </ul>
               </>
             }
             isVisible={activeItem === 'Maobi' && activeSubItem !== 'practice'}
             // 3D Model settings
             modelPath="/models/Stift_platzhalter/scene.gltf"
-            modelContainerWidth={400}
-            modelContainerHeight={400}
+            modelContainerWidth={500}
+            modelContainerHeight={500}
             baseRotation={[0, 0, 0]}
             autoRotateSpeed={0.35}
             // InfotextBox settings
-            infoBoxHeight={400}
+            infoBoxHeight={500}
+            infoBoxWidth={800}
+            backgroundImage={papyrusImg}
           />
         );
       case 'Schriftwandel':
@@ -781,6 +790,7 @@ function App() {
           magnification={80}
           bend={1}
           activeItem={activeItem}
+          activeSubItem={activeSubItem}
           onItemClick={handleDockItemClick}
           onSubItemClick={handleSubItemClick}
         />
