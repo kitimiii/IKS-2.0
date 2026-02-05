@@ -63,10 +63,8 @@ function DockItem({ children, className = '', onClick, mouseX, spring, distance,
         return val - rect.x - baseItemSize / 2;
     });
 
-    // Berechne die Zielgröße basierend auf Mausdistanz
-    // HOME ITEM RESET: Wenn label 'Home' ist, wird keine Vergrößerung angewendet
-    const isHome = label === 'Home';
-    const targetSize = useTransform(mouseDistance, [-distance, 0, distance], [baseItemSize, isHome ? baseItemSize : magnification, baseItemSize]);
+    // Keine Vergrößerung mehr - alle Items bleiben gleich groß
+    const targetSize = useTransform(mouseDistance, [-distance, 0, distance], [baseItemSize, baseItemSize, baseItemSize]);
     const size = useSpring(targetSize, spring);
 
     // Zeige Sub-Items nur wenn dieses Item aktiv ist und subItems vorhanden sind

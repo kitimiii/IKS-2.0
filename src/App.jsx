@@ -901,6 +901,7 @@ function App() {
           magnification={80}
           bend={1}
           activeItem={activeItem}
+          activeSubItem={activeSubItem}
           onItemClick={handleDockItemClick}
           onSubItemClick={handleSubItemClick}
         />
