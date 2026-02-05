@@ -53,8 +53,8 @@ import wandImg from './assets/slider-image2/wand.jpg';
 import zitatImg from './assets/slider-image2/zitat.jpg';
 
 // Bilder für Practice-Seiten
-import SchreibuebungDeutsch from './assets/Images/SchreibuebungDeutsch.PNG';
-import SchreibuebungArabisch from './assets/Images/SchreibuebungArabisch.PNG';
+import SchreibuebungDeutsch from './assets/Images/SchreibuebungDeutsch.png';
+import SchreibuebungArabisch from './assets/Images/SchreibuebungArabisch.png';
 import SchreibuebungChinesisch from './assets/Images/Schreibübung_chinesisch.svg';
 
 // Bilder für Der Kalligraf Seite
@@ -334,8 +334,8 @@ function App() {
             6: 'Platzhalter 6',
             7: 'Platzhalter 7',
             8: 'Platzhalter 8',
-            9: 'Platzhalter 9',
-            10: 'Über den goldenen Feldern ziehen die Wolken dahin; zwischen den Blumen weht der Wind des Herbstes. Japanische Kalligrafie Foto von https://unsplash.com/de',
+            9: 'Passage from the Quran Say: Intercession belongs to God alone. His is the dominion of the heavens and the earth, and to Him you will be returned. Arabic calligraphy Photo by https://unsplash.com/de',
+            10: 'Clouds drift across the golden fields; the autumn wind blows among the flowers. Japanese calligraphy Photo by https://unsplash.com/de',
             11: 'Platzhalter 11',
             12: 'Platzhalter 12'
           };
