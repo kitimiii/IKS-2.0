@@ -18,7 +18,7 @@ import typografie3 from '../../assets/Images/Typografie3.jpg';
 const CalligraphyGame = ({
     // Customizable props
     instructionText = "Mark all 4 words that belong to the topic calligraphy.",
-    requiredSelections = 4,
+    requiredSelections = 3,
     submitButtonPosition = { left: '50%', transform: 'translateX(-50%)' }, // Veränderbar
     correctOpacity = 0.3, // Transparenz für richtige Antworten
     incorrectOpacity = 0.3, // Transparenz für falsche Antworten
