@@ -19,9 +19,9 @@ const subItemsConfig = {
         { text: 'Theory', id: 'maobi-sub-1' },
         { text: 'Practice', id: 'maobi-sub-2' }
     ],
-    'Evolution of Script': [
-        { text: 'Modern Calligraphy', id: 'Evolution of Script-sub-1' },
-        { text: 'The Calligrapher', id: 'Evolution of Script-sub-2' }
+    'Schriftwandel': [
+        { text: 'Moderne Kalligrafie', id: 'schriftwandel-sub-1' },
+        { text: 'Der Kalligraf', id: 'schriftwandel-sub-2' }
     ]
 };
 
@@ -77,13 +77,13 @@ function DockItem({ children, className = '', onClick, mouseX, spring, distance,
         if (!activeSubItem) return false;
 
         // Schriftwandel Cases
-        if (activeSubItem === 'moderneKalligrafie' && id === 'Evolution of Script-sub-1') return true;
-        if (activeSubItem === 'machingGame' && id === 'Evolution of Script-sub-2') return true;
+        if (activeSubItem === 'moderneKalligrafie' && id === 'schriftwandel-sub-1') return true;
+        if (activeSubItem === 'machingGame' && id === 'schriftwandel-sub-2') return true;
 
         // Theory/Practice Cases (Feather quill, Qalam , Maobi)
         // Check contents but exclude schriftwandel to be safe
-        if (activeSubItem === 'theory' && id.includes('sub-1') && !id.includes('Evolution of Script')) return true;
-        if (activeSubItem === 'practice' && id.includes('sub-2') && !id.includes('Evolution of Script')) return true;
+        if (activeSubItem === 'theory' && id.includes('sub-1') && !id.includes('schriftwandel')) return true;
+        if (activeSubItem === 'practice' && id.includes('sub-2') && !id.includes('schriftwandel')) return true;
 
         return false;
     };

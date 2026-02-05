@@ -18,6 +18,11 @@ import federkielAudio from './assets/Audios/Federkiel.mov';
 import federkiel2Audio from './assets/Audios/Federkiel2.mov';
 import maobiAudio from './assets/Audios/Maobi.mov';
 import maobi2Audio from './assets/Audios/Maobi2.mov';
+import modernAudio from './assets/Audios/modern.mov';
+import modern2Audio from './assets/Audios/modern2.mov';
+import modernVStraditionalAudio from './assets/Audios/modernVStraditionell.mov';
+import qalamAudio from './assets/Audios/Qalam.mov';
+import qalam2Audio from './assets/Audios/Qalam2.mov';
 
 // Dock Icon Bilder
 import HausBraun from './assets/Images/HausBraun.PNG';
@@ -88,6 +93,11 @@ function App() {
   const federkiel2AudioRef = useRef(null);
   const maobiAudioRef = useRef(null);
   const maobi2AudioRef = useRef(null);
+  const modernAudioRef = useRef(null);
+  const modern2AudioRef = useRef(null);
+  const modernVStraditionalAudioRef = useRef(null);
+  const qalamAudioRef = useRef(null);
+  const qalam2AudioRef = useRef(null);
 
   // Stable callbacks for CircularGallery - defined at top level
   const handleImageClick = useCallback((imageIndex) => {
@@ -180,6 +190,46 @@ function App() {
       maobi2AudioRef.current.pause();
       maobi2AudioRef.current.currentTime = 0;
     }
+
+    // Qalam theory page
+    if (activeItem === 'Qalam ' && activeSubItem !== 'practice' && qalamAudioRef.current) {
+      qalamAudioRef.current.play().catch(error => {
+        console.log('Auto-play prevented by browser:', error);
+      });
+    } else if (qalamAudioRef.current) {
+      qalamAudioRef.current.pause();
+      qalamAudioRef.current.currentTime = 0;
+    }
+
+    // Qalam practice page
+    if (activeItem === 'Qalam ' && activeSubItem === 'practice' && qalam2AudioRef.current) {
+      qalam2AudioRef.current.play().catch(error => {
+        console.log('Auto-play prevented by browser:', error);
+      });
+    } else if (qalam2AudioRef.current) {
+      qalam2AudioRef.current.pause();
+      qalam2AudioRef.current.currentTime = 0;
+    }
+
+    // Schriftwandel - Moderne Kalligrafie (modern.mov)
+    if (activeItem === 'Schriftwandel' && activeSubItem === 'moderneKalligrafie' && modernAudioRef.current) {
+      modernAudioRef.current.play().catch(error => {
+        console.log('Auto-play prevented by browser:', error);
+      });
+    } else if (modernAudioRef.current) {
+      modernAudioRef.current.pause();
+      modernAudioRef.current.currentTime = 0;
+    }
+
+    // Schriftwandel - Der Kalligraf
+    if (activeItem === 'Schriftwandel' && activeSubItem === 'machingGame' && modernVStraditionalAudioRef.current) {
+      modernVStraditionalAudioRef.current.play().catch(error => {
+        console.log('Auto-play prevented by browser:', error);
+      });
+    } else if (modernVStraditionalAudioRef.current) {
+      modernVStraditionalAudioRef.current.pause();
+      modernVStraditionalAudioRef.current.currentTime = 0;
+    }
   }, [activeItem, activeSubItem]);
 
   const handleIntroAudioEnded = () => {
@@ -222,6 +272,31 @@ function App() {
   const handleMaobi2AudioEnded = () => {
     // Do nothing - audio plays only once
     console.log('Maobi2 audio ended');
+  };
+
+  const handleModernAudioEnded = () => {
+    // Nach Ende von modern.mov spiele modern2.mov ab
+    if (modern2AudioRef.current && activeItem === 'Schriftwandel' && activeSubItem === 'moderneKalligrafie') {
+      modern2AudioRef.current.play().catch(error => {
+        console.log('Auto-play of modern2 prevented:', error);
+      });
+    }
+  };
+
+  const handleModern2AudioEnded = () => {
+    console.log('Modern2 audio ended');
+  };
+
+  const handleModernVStraditionalAudioEnded = () => {
+    console.log('ModernVStraditional audio ended');
+  };
+
+  const handleQalamAudioEnded = () => {
+    console.log('Qalam audio ended');
+  };
+
+  const handleQalam2AudioEnded = () => {
+    console.log('Qalam2 audio ended');
   };
 
   const handleDockItemClick = (label, index) => {
@@ -516,27 +591,43 @@ function App() {
       case 'Qalam ':
         if (activeSubItem === 'practice') {
           return (
-            <PracticePage
-              title="Qalam "
-              subtitleText="Nehme den Stift in die Hand und schreibe nun"
-              subtitleText2="das Wort in der Qalam  Schrift nach"
-              imagePath={SchreibuebungArabisch}
-            />
+            <>
+              {/* Audio Element for Qalam Practice */}
+              <audio
+                ref={qalam2AudioRef}
+                src={qalam2Audio}
+                onEnded={handleQalam2AudioEnded}
+              />
+              <PracticePage
+                title="Qalam "
+                subtitleText="Nehme den Stift in die Hand und schreibe nun"
+                subtitleText2="das Wort in der Qalam  Schrift nach"
+                imagePath={SchreibuebungArabisch}
+              />
+            </>
           );
         }
         return (
           <TheoryPage
             title="Qalam "
             infoContent={
-              <ul>
-                <li>Traditional reed pen used across the Middle East</li>
-                <li>Especially important in the Islamic world</li>
-                <li>Tip cut at an angle for clear, sharp, angular lines</li>
-                <li>Ideal for geometric writing styles</li>
-                <li>Most important tool in Islamic calligraphy</li>
-                <li>Often used for copying the Quran</li>
-                <li>Script held high cultural and spiritual importance because images were avoided</li>
-              </ul>
+              <>
+                {/* Audio Element for Qalam Theory */}
+                <audio
+                  ref={qalamAudioRef}
+                  src={qalamAudio}
+                  onEnded={handleQalamAudioEnded}
+                />
+                <ul>
+                  <li>Traditional reed pen used across the Middle East</li>
+                  <li>Especially important in the Islamic world</li>
+                  <li>Tip cut at an angle for clear, sharp, angular lines</li>
+                  <li>Ideal for geometric writing styles</li>
+                  <li>Most important tool in Islamic calligraphy</li>
+                  <li>Often used for copying the Quran</li>
+                  <li>Script held high cultural and spiritual importance because images were avoided</li>
+                </ul>
+              </>
             }
             isVisible={activeItem === 'Qalam ' && activeSubItem !== 'practice'}
             // 3D Model settings
@@ -607,6 +698,12 @@ function App() {
               pageHint="Der Kalligraf"
               showHint={true}
             >
+              {/* Audio Element for Der Kalligraf */}
+              <audio
+                ref={modernVStraditionalAudioRef}
+                src={modernVStraditionalAudio}
+                onEnded={handleModernVStraditionalAudioEnded}
+              />
               <div style={{
                 display: 'flex',
                 justifyContent: 'center',
@@ -667,6 +764,17 @@ function App() {
             pageHint="Moderne Kalligraphie"
             showHint={true}
           >
+            {/* Audio Elements for Moderne Kalligrafie */}
+            <audio
+              ref={modernAudioRef}
+              src={modernAudio}
+              onEnded={handleModernAudioEnded}
+            />
+            <audio
+              ref={modern2AudioRef}
+              src={modern2Audio}
+              onEnded={handleModern2AudioEnded}
+            />
             <div style={{
               height: '600px',
               width: '100%',
