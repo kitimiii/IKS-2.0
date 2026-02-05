@@ -76,7 +76,7 @@ const PracticePage = ({
             );
             const x = (canvas.width - img.width * scale) / 2;
             const y = (canvas.height - img.height * scale) / 2;
-            ctx.globalAlpha = 0.3;
+            ctx.globalAlpha = 1;
             ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
             ctx.globalAlpha = 1;
         }
