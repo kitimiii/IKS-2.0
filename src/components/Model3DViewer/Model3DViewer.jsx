@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, Suspense } from 'react';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { OrbitControls, useGLTF, Center } from '@react-three/drei';
+import { OrbitControls, useGLTF, Center, Environment } from '@react-three/drei';
 import * as THREE from 'three';
 import './Model3DViewer.css';
 
@@ -79,9 +79,9 @@ export const Model3DViewer = ({
                 gl={{ alpha: true, antialias: true }}
             >
                 {/* Lighting */}
-                <ambientLight intensity={0.6} />
-                <directionalLight position={[10, 10, 5]} intensity={1} />
-                <directionalLight position={[-10, -10, -5]} intensity={0.3} />
+                <ambientLight intensity={2.5} />
+                <directionalLight position={[10, 10, 5]} intensity={4.0} />
+                <directionalLight position={[-10, -10, -5]} intensity={2.0} />
 
                 {/* Model */}
                 <Suspense fallback={<LoadingFallback />}>
@@ -113,6 +113,7 @@ export const Model3DViewer = ({
                         TWO: THREE.TOUCH.DOLLY_PAN
                     }}
                 />
+                <Environment preset="city" />
             </Canvas>
         </div>
     );

@@ -12,8 +12,8 @@ import dokument from '../../assets/slider-image/dokument (1).jpg';
 import japan from '../../assets/slider-image/japan.jpg';
 import schreiben from '../../assets/slider-image/schreiben.jpg';
 import schrift from '../../assets/slider-image/schrift.jpg';
-import tisch from '../../assets/slider-image/tisch (1).jpg';
-import wand from '../../assets/slider-image/wand (1).jpg';
+import tisch from '../../assets/slider-image/arabisch.jpg';
+import wand from '../../assets/slider-image/japanisch.jpg';
 import werkzeug from '../../assets/slider-image/werkzeug (1).jpg';
 import zitat from '../../assets/slider-image/zitat (1).jpg';
 
@@ -399,21 +399,21 @@ class App {
         if (!this.isDown) return;
         const x = e.touches ? e.touches[0].clientX : e.clientX;
         const distance = (this.start - x) * (this.scrollSpeed * 0.025);
-        
+
         // Track if user has moved
         if (Math.abs(this.start - x) > 5) {
             this.hasMoved = true;
         }
-        
+
         this.scroll.target = this.scroll.position + distance;
     }
     onTouchUp(e) {
         if (!this.isDown) return;
         this.isDown = false;
-        
+
         // Check if this was a click (not a drag)
         const clickTime = Date.now() - this.clickStart;
-        
+
         // If quick click with minimal movement, treat as image click
         if (clickTime < 300 && !this.hasMoved && this.onImageClick && this.medias && this.medias[0]) {
             // Find which image was clicked based on scroll position
@@ -424,7 +424,7 @@ class App {
             if (currentIndex < 0) currentIndex += galleryLength;
             this.onImageClick(currentIndex + 1); // +1 to make it 1-indexed
         }
-        
+
         this.onCheck();
     }
     onWheel(e) {
@@ -461,14 +461,14 @@ class App {
         const direction = this.scroll.current > this.scroll.last ? 'right' : 'left';
         if (this.medias) {
             this.medias.forEach(media => media.update(this.scroll, direction));
-            
+
             // Check if current focused image changed (only if callback exists)
             if (this.onCurrentImageChange && this.medias[0] && this.mediasImages) {
                 const galleryLength = this.mediasImages.length / 2;
                 const width = this.medias[0].width;
                 let newIndex = Math.round(Math.abs(this.scroll.current) / width) % galleryLength;
                 if (newIndex < 0) newIndex += galleryLength;
-                
+
                 // Only trigger callback if index actually changed
                 if (this.currentImageIndex !== newIndex) {
                     this.currentImageIndex = newIndex;

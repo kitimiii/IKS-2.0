@@ -262,17 +262,32 @@
       "uri": "scene.bin"
     }
   ],
+  "images": [
+    {
+      "mimeType": "image/jpeg",
+      "name": "fine_grained_wood_col_4k",
+      "uri": "textures/fine_grained_wood_col_4k.jpg"
+    },
+    {
+      "mimeType": "image/png",
+      "name": "Pinsel",
+      "uri": "textures/Pinsel.png"
+    }
+  ],
   "materials": [
     {
       "doubleSided": true,
       "name": "Holzgriff",
       "pbrMetallicRoughness": {
         "baseColorFactor": [
-          0.8,
-          0.8,
-          0.8,
+          1.0,
+          1.0,
+          1.0,
           1.0
         ],
+        "baseColorTexture": {
+          "index": 0
+        },
         "metallicFactor": 0.0,
         "roughnessFactor": 0.8211145618000169
       }
@@ -296,11 +311,14 @@
       "name": "Pinsel",
       "pbrMetallicRoughness": {
         "baseColorFactor": [
-          0.0616541,
-          0.800007,
-          0.12109,
+          1.0,
+          1.0,
+          1.0,
           1.0
         ],
+        "baseColorTexture": {
+          "index": 1
+        },
         "metallicFactor": 0.0,
         "roughnessFactor": 0.8671741261810418
       }
@@ -561,6 +579,12 @@
       "name": "Object_12"
     }
   ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987
+    }
+  ],
   "scene": 0,
   "scenes": [
     {
@@ -568,6 +592,16 @@
       "nodes": [
         0
       ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
     }
   ]
 }
