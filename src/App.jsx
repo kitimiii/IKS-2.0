@@ -334,8 +334,8 @@ function App() {
             6: 'Platzhalter 6',
             7: 'Platzhalter 7',
             8: 'Platzhalter 8',
-            9: 'Passage from the Quran Say: Intercession belongs to God alone. His is the dominion of the heavens and the earth, and to Him you will be returned. Arabic calligraphy Photo by https://unsplash.com/de',
-            10: 'Clouds drift across the golden fields; the autumn wind blows among the flowers. Japanese calligraphy Photo by https://unsplash.com/de',
+            9: 'Passage from the Quran Say: Intercession belongs to God alone. His is the dominion of the heavens and the earth, and to Him you will be returned. Arabic calligraphy',
+            10: 'Clouds drift across the golden fields; the autumn wind blows among the flowers. Japanese calligraphy',
             11: 'Platzhalter 11',
             12: 'Platzhalter 12'
           };
