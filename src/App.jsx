@@ -141,7 +141,7 @@ function App() {
       grunduebungAudioRef.current.currentTime = 0;
     }
 
-    // Federkiel theory page
+    // Feather quill theory page
     if (activeItem === 'Federkiel' && activeSubItem !== 'practice' && federkielAudioRef.current) {
       federkielAudioRef.current.play().catch(error => {
         console.log('Auto-play prevented by browser:', error);
@@ -229,8 +229,8 @@ function App() {
     setSelectedImage(null);
     setSelectedModerneImage(null);
 
-    // For Federkiel, Qualam, Maobi - automatically navigate to Theory sub-page
-    if (label === 'Federkiel' || label === 'Qualam' || label === 'Maobi') {
+    // For Federkiel, Qalam , Maobi - automatically navigate to Theory sub-page
+    if (label === 'Federkiel' || label === 'Qalam ' || label === 'Maobi') {
       setActiveItem(label);
       setActiveSubItem('theory');
       console.log(`Navigiere direkt zu: ${label} Theory`);
@@ -279,8 +279,8 @@ function App() {
       label: 'Federkiel'
     },
     {
-      icon: <img src={activeItem === 'Qualam' ? QalamBeige : QalamBraun} alt="Qualam" style={{ width: '60px', height: '60px' }} />,
-      label: 'Qualam'
+      icon: <img src={activeItem === 'Qalam ' ? QalamBeige : QalamBraun} alt="Qalam " style={{ width: '60px', height: '60px' }} />,
+      label: 'Qalam '
     },
     {
       icon: <img src={activeItem === 'Maobi' ? MaobiBeige : MaobiBraun} alt="Maobi" style={{ width: '60px', height: '60px' }} />,
@@ -513,20 +513,20 @@ function App() {
             infoBoxHeight={400}
           />
         );
-      case 'Qualam':
+      case 'Qalam ':
         if (activeSubItem === 'practice') {
           return (
             <PracticePage
-              title="Qualam"
+              title="Qalam "
               subtitleText="Nehme den Stift in die Hand und schreibe nun"
-              subtitleText2="das Wort in der Qualam Schrift nach"
+              subtitleText2="das Wort in der Qalam  Schrift nach"
               imagePath={SchreibuebungArabisch}
             />
           );
         }
         return (
           <TheoryPage
-            title="Qualam"
+            title="Qalam "
             infoContent={
               <ul>
                 <li>Traditional reed pen used across the Middle East</li>
@@ -538,7 +538,7 @@ function App() {
                 <li>Script held high cultural and spiritual importance because images were avoided</li>
               </ul>
             }
-            isVisible={activeItem === 'Qualam' && activeSubItem !== 'practice'}
+            isVisible={activeItem === 'Qalam ' && activeSubItem !== 'practice'}
             // 3D Model settings
             modelPath="/models/Stift_platzhalter/scene.gltf"
             modelContainerWidth={400}

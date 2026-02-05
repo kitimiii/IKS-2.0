@@ -22,7 +22,7 @@ const BRUSH = {
 };
 
 const PracticePage = ({
-    // Page title - e.g. "Federkiel", "Qualam", "Maobi"
+    // Page title - e.g. "Feather quill", "Qalam ", "Maobi"
     title = 'Werkzeug/Schriftart',
     // Subtitle text - customizable for each page
     subtitleText = 'Nehme den Stift in die Hand und schreibe nun',
@@ -122,61 +122,61 @@ const PracticePage = ({
 
         const dx = currentPoint.x - prevPoint.x;
         const dy = currentPoint.y - prevPoint.y;
-        
+
         // Für Maobi: Strichstärke basierend auf Geschwindigkeit
         if (title === 'Maobi') {
             // Langsame Bewegung = dick, schnelle Bewegung = dünn
             if (!lastTime || !currentTime) return BRUSH.baseSize;
-            
+
             const distance = Math.sqrt(dx * dx + dy * dy);
             const timeDelta = currentTime - lastTime;
-            
+
             // Vermeide Division durch Null
             if (timeDelta <= 0 || distance <= 0) return BRUSH.baseSize;
-            
+
             // Geschwindigkeit in Pixel pro Millisekunde
             const velocity = distance / timeDelta;
-            
+
             // Viel größerer Geschwindigkeitsbereich für mehr Mittelwerte
             const slowVelocity = 0.05;  // Sehr langsam = maximale Dicke
             const fastVelocity = 5.0;   // Sehr schnell = minimale Dicke
-            
+
             // Normalisiere Geschwindigkeit (0 = langsam, 1 = schnell)
             let normalizedVelocity = (velocity - slowVelocity) / (fastVelocity - slowVelocity);
             normalizedVelocity = Math.max(0, Math.min(1, normalizedVelocity));
-            
+
             // Sanfterer Übergang mit niedrigerem Exponenten für mehr Mittelwerte
             const exponentialFactor = Math.pow(normalizedVelocity, 0.7);
-            
+
             // Invertiere für dickere Striche bei langsamer Bewegung (1 = dick, 0 = dünn)
             const thickness = 1 - exponentialFactor;
-            
+
             // Interpoliere zwischen minSize und maxSize mit sanfter Kurve
             const newSize = BRUSH.minSize + (BRUSH.maxSize - BRUSH.minSize) * thickness;
-            
+
             return newSize;
         } else {
             // Für andere Werkzeuge: Strichstärke basierend auf Richtung
             // Berechne den Winkel der Bewegung
             const angle = Math.atan2(dy, dx);
-            
-            // Für Federkiel: 30° Rotation wie bei einem echten Federkiel
-            if (title === 'Federkiel') {
-                // Federkiel wird in 30° Winkel gehalten
+
+            // Für Feather quill: 30° Rotation wie bei einem echten Feather quill
+            if (title === 'Feather quill') {
+                // Feather quill wird in 30° Winkel gehalten
                 const penAngle = -30 * Math.PI / 180; // 30° in Radiant
-                
-                // Berechne den Winkel relativ zur Federkiel-Orientierung
+
+                // Berechne den Winkel relativ zur Feather quill-Orientierung
                 // Die dicksten Striche entstehen senkrecht zur Schnittfläche (bei 30° + 90° = 120°)
                 // Die dünnsten parallel zur Schnittfläche (bei 30°)
                 const relativeAngle = angle - penAngle;
-                
+
                 // sin² gibt uns die Strichstärke: 0 bei 0°/180° (dünn), 1 bei 90°/270° (dick)
                 const sinValue = Math.sin(relativeAngle);
                 const thickness = Math.abs(sinValue);
-                
+
                 // Interpoliere zwischen minSize und maxSize
                 const newSize = BRUSH.minSize + (BRUSH.maxSize - BRUSH.minSize) * thickness;
-                
+
                 return newSize;
             } else {
                 // Für Qalam: Konstante Strichstärke in alle Richtungen (immer dick)

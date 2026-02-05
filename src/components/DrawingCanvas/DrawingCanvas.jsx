@@ -16,22 +16,22 @@ const CONFIG = {
 // Pinsel-Konfiguration
 const BRUSHES = {
     feder: {
-        name: 'Federkiel',
-        baseSize: 5,        
+        name: 'Feather quill',
+        baseSize: 5,
         minSize: 1,
         maxSize: 5,
         pressureSensitivity: 0.8,
     },
     pinsel: {
         name: 'Maobi',
-        baseSize: 5,         
+        baseSize: 5,
         minSize: 2,
         maxSize: 5,
         pressureSensitivity: 1.2,
     },
     qalam: {
         name: 'Qalam',
-        baseSize: 5,        
+        baseSize: 5,
         minSize: 1,
         maxSize: 5,
         pressureSensitivity: 0.8,
@@ -128,49 +128,49 @@ const DrawingCanvas = () => {
 
         const dx = currentPoint.x - prevPoint.x;
         const dy = currentPoint.y - prevPoint.y;
-        
-        // Für Federkiel: Strichstärke basierend auf Richtung
-        if (brush.name === 'Federkiel') {
+
+        // Für Feather quill: Strichstärke basierend auf Richtung
+        if (brush.name === 'Feather quill') {
             // Berechne den Winkel der Bewegung
             const angle = Math.atan2(dy, dx);
-            
+
             // Vertikale Striche (±90°) = dick, Horizontale Striche (0° oder 180°) = dünn
             // Math.cos gibt 1 bei 0°, 0 bei 90°, -1 bei 180°
             // Wir nehmen den Absolutwert und invertieren für unsere Zwecke
             const horizontalness = Math.abs(Math.cos(angle)); // 1 = horizontal, 0 = vertikal
-            
+
             // Interpoliere zwischen minSize (horizontal) und maxSize (vertikal)
             const newSize = brush.minSize + (brush.maxSize - brush.minSize) * (1 - horizontalness);
-            
+
             return newSize;
         } else if (brush.name === 'Maobi') {
             // Für Maobi: Strichstärke basierend auf Geschwindigkeit
             // Langsame Bewegung = dick, schnelle Bewegung = dünn
             if (!lastTime || !currentTime) return brush.baseSize;
-            
+
             const distance = Math.sqrt(dx * dx + dy * dy);
             const timeDelta = currentTime - lastTime;
-            
+
             // Vermeide Division durch Null
             if (timeDelta <= 0 || distance <= 0) return brush.baseSize;
-            
+
             // Geschwindigkeit in Pixel pro Millisekunde
             const velocity = distance / timeDelta;
-            
+
             // Geschwindigkeitsschwellenwerte (anpassbar)
             const slowVelocity = 0.3;  // Langsam = unter 0.3 px/ms
             const fastVelocity = 1.0;  // Schnell = über 2.0 px/ms
-            
+
             // Normalisiere Geschwindigkeit (0 = langsam/dick, 1 = schnell/dünn)
             let normalizedVelocity = (velocity - slowVelocity) / (fastVelocity - slowVelocity);
             normalizedVelocity = Math.max(0, Math.min(1, normalizedVelocity));
-            
+
             // Invertiere für dickere Striche bei langsamer Bewegung
             const thickness = 1 - normalizedVelocity;
-            
+
             // Interpoliere zwischen minSize (schnell) und maxSize (langsam)
             const newSize = brush.minSize + (brush.maxSize - brush.minSize) * thickness;
-            
+
             return newSize;
         } else {
             // Für Qalam: ursprüngliche Logik beibehalten
