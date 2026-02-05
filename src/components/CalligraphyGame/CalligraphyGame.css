@@ -41,8 +41,25 @@
     gap: 20px;
     max-width: 900px;
     width: 100%;
-    margin-bottom: 60px;
     padding: 20px;
+}
+
+/* Result Row */
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 900px;
+    width: 100%;
+    padding: 0 20px;
+    margin-bottom: 30px;
+}
+
+.result-text {
+    font-family: 'Sedan', serif;
+    font-size: 1.8em;
+    color: #61554B;
+    font-weight: 600;
 }
 
 /* Game Item */
@@ -51,7 +68,7 @@
     aspect-ratio: 1;
     border: 3px solid transparent;
     border-radius: 8px;
-    overflow: hidden;
+    overflow: visible;
     transition: all 0.3s ease;
     background: #fff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -72,6 +89,7 @@
     height: 100%;
     object-fit: cover;
     display: block;
+    border-radius: 8px;
 }
 
 /* Result Overlays */
@@ -137,8 +155,9 @@
 /* Info Tooltip */
 .info-tooltip {
     position: absolute;
-    bottom: 40px;
-    left: 0;
+    bottom: 45px;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: rgba(249, 235, 213, 0.95);
     color: #61554B;
     padding: 15px 20px;
@@ -146,11 +165,13 @@
     font-family: 'Sedan', serif;
     font-size: 0.95em;
     line-height: 1.5;
-    width: 250px;
+    width: 280px;
+    max-width: 90vw;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    z-index: 100;
+    z-index: 1000;
     animation: fadeIn 0.3s ease;
     border: 2px solid #61554B;
+    pointer-events: none;
 }
 
 @keyframes fadeIn {

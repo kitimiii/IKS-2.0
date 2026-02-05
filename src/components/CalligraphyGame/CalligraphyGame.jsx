@@ -29,20 +29,19 @@ const CalligraphyGame = ({
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [showWarning, setShowWarning] = useState(false);
     const [hoveredInfoId, setHoveredInfoId] = useState(null);
-    const [showResultPopup, setShowResultPopup] = useState(false);
 
     // Game items - 4 traditional calligraphy (correct) and 6 modern/typography (incorrect)
     const gameItems = [
         { id: 1, image: abcTraditional, isCorrect: true },
-        { id: 2, image: handlettering, isCorrect: false },
+        { id: 2, image: handlettering, isCorrect: false, tooltip: "Hierbei handelt es sich um Handlettering, eine moderne Kunstform, welche nicht zur traditionellen Kalligraphie gehört." },
         { id: 3, image: arabCalligraphy, isCorrect: true },
-        { id: 4, image: typografie, isCorrect: false },
+        { id: 4, image: typografie, isCorrect: false, tooltip: "Hierbei handelt es sich um Typografie, die sich auf gedruckte oder digitale Schrift bezieht." },
         { id: 5, image: chineseCalligraphy, isCorrect: true },
-        { id: 6, image: handlettering2, isCorrect: false },
+        { id: 6, image: handlettering2, isCorrect: false, tooltip: "Dies ist modernes Handlettering, eine zeitgenössische Schriftkunst, aber keine traditionelle Kalligraphie." },
         { id: 7, image: modernCalligraphy, isCorrect: true },
-        { id: 8, image: typografie2, isCorrect: false },
-        { id: 9, image: handlettering3, isCorrect: false },
-        { id: 10, image: typografie3, isCorrect: false },
+        { id: 8, image: typografie2, isCorrect: false, tooltip: "Hierbei handelt es sich um Typografische Schriften, die für den Druck konzipiert sind und sich von der handgeschriebenen Kalligraphie unterscheiden." },
+        { id: 9, image: handlettering3, isCorrect: false, tooltip: "Dies ist Handlettering, eine dekorative Schriftgestaltung, aber keine klassische Kalligraphie." },
+        { id: 10, image: typografie3, isCorrect: false, tooltip: "Diese digitale Typografie gehört nicht zur traditionellen, handgeschriebenen Kalligraphie." },
     ];
 
     const handleItemClick = (id) => {
@@ -66,13 +65,11 @@ const CalligraphyGame = ({
             return;
         }
         setIsSubmitted(true);
-        setShowResultPopup(true);
     };
 
     const handleTryAgain = () => {
         setSelectedItems([]);
         setIsSubmitted(false);
-        setShowResultPopup(false);
     };
 
     // Berechne die Anzahl der richtigen Antworten
@@ -162,7 +159,7 @@ const CalligraphyGame = ({
                                     {/* Info Tooltip */}
                                     {hoveredInfoId === item.id && (
                                         <div className="info-tooltip">
-                                            {infoTooltipText}
+                                            {item.tooltip || infoTooltipText}
                                         </div>
                                     )}
                                 </div>
@@ -171,6 +168,18 @@ const CalligraphyGame = ({
                     );
                 })}
             </div>
+
+            {/* Result Row - shows after submit */}
+            {isSubmitted && (
+                <div className="result-row">
+                    <span className="result-text">{correctAnswersCount}/4 richtig</span>
+                    {correctAnswersCount !== 4 && (
+                        <button className="try-again-button" onClick={handleTryAgain}>
+                            Try Again
+                        </button>
+                    )}
+                </div>
+            )}
 
             {/* Submit Button */}
             <div className="submit-button-container" style={submitButtonPosition}>
@@ -189,18 +198,6 @@ const CalligraphyGame = ({
                     Submit
                 </button>
             </div>
-
-            {/* Result Popup */}
-            {showResultPopup && (
-                <div className="result-popup-overlay" onClick={() => setShowResultPopup(false)}>
-                    <div className="result-popup" onClick={(e) => e.stopPropagation()}>
-                        <h2 className="result-title">{correctAnswersCount}/4 richtig</h2>
-                        <button className="try-again-button" onClick={handleTryAgain}>
-                            Try Again
-                        </button>
-                    </div>
-                </div>
-            )}
         </div>
     );
 };
