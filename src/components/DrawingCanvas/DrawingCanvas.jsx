@@ -23,7 +23,7 @@ const BRUSHES = {
         pressureSensitivity: 0.8,
     },
     pinsel: {
-        name: 'Maobi',
+        name: 'Maoobi',
         baseSize: 5,
         minSize: 2,
         maxSize: 5,
