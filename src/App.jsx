@@ -301,7 +301,7 @@ function App() {
     setSelectedModerneImage(null);
 
     // For Federkiel, Qalam , Maobi - automatically navigate to Theory sub-page
-    if (label === 'Feather quill' || label === 'Qalam ' || label === 'Maobi') {
+    if (label === 'Quill pen' || label === 'Qalam ' || label === 'Maobi') {
       setActiveItem(label);
       setActiveSubItem('theory');
       console.log(`Navigiere direkt zu: ${label} Theory`);
@@ -543,7 +543,7 @@ function App() {
                 onEnded={handleFederkiel2AudioEnded}
               />
               <PracticePage
-                title="Quill pen"
+                title="Federkiel"
                 subtitleText="Pick up the pen and write the word in Quill pen script."
                 subtitleText2=""
                 imagePath={SchreibuebungDeutsch}
