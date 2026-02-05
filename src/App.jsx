@@ -13,7 +13,7 @@ import CalligraphyGame from './components/CalligraphyGame';
 // Audio files
 import introAudio from './assets/Audios/Intro.mov';
 import definitionAudio from './assets/Audios/Definiton.mov';
-import grunduebungAudio from './assets/Audios/Grundübung.mov';
+import grunduebungAudio from './assets/Audios/Basic exercise.mov';
 import federkielAudio from './assets/Audios/Federkiel.mov';
 import federkiel2Audio from './assets/Audios/Federkiel2.mov';
 import maobiAudio from './assets/Audios/Maobi.mov';
@@ -131,8 +131,8 @@ function App() {
       definitionAudioRef.current.currentTime = 0;
     }
 
-    // Grundübung page
-    if (activeItem === 'Grundübung' && grunduebungAudioRef.current) {
+    // Basic exercise page
+    if (activeItem === 'Basic exercise' && grunduebungAudioRef.current) {
       grunduebungAudioRef.current.play().catch(error => {
         console.log('Auto-play prevented by browser:', error);
       });
@@ -201,7 +201,7 @@ function App() {
 
   const handleGrunduebungAudioEnded = () => {
     // Do nothing - audio plays only once
-    console.log('Grundübung audio ended');
+    console.log('Basic exercise audio ended');
   };
 
   const handleFederkielAudioEnded = () => {
@@ -228,7 +228,7 @@ function App() {
     // Reset popup states when changing pages
     setSelectedImage(null);
     setSelectedModerneImage(null);
-    
+
     // For Federkiel, Qualam, Maobi - automatically navigate to Theory sub-page
     if (label === 'Federkiel' || label === 'Qualam' || label === 'Maobi') {
       setActiveItem(label);
@@ -271,8 +271,8 @@ function App() {
       label: 'Definition'
     },
     {
-      icon: <img src={activeItem === 'Grundübung' ? ÜbungBeige : ÜbungBraun} alt="Grundübung" style={{ width: '60px', height: '60px' }} />,
-      label: 'Grundübung'
+      icon: <img src={activeItem === 'Basic exercise' ? ÜbungBeige : ÜbungBraun} alt="Basic exercise" style={{ width: '60px', height: '60px' }} />,
+      label: 'Basic exercise'
     },
     {
       icon: <img src={activeItem === 'Federkiel' ? FederBeige : FederBraun} alt="Federkiel" style={{ width: '60px', height: '60px' }} />,
@@ -350,7 +350,7 @@ function App() {
               src={definitionAudio}
               onEnded={handleDefinitionAudioEnded}
             />
-            
+
             <div style={{
               height: '600px',
               width: '100%',
@@ -445,19 +445,19 @@ function App() {
             </div>
           </PageWrapper>
         );
-      case 'Grundübung':
+      case 'Basic exercise':
         return (
           <PageWrapper
             pageHint=""
             showHint={false}
           >
-            {/* Audio Element for Grundübung */}
+            {/* Audio Element for Basic exercise */}
             <audio
               ref={grunduebungAudioRef}
               src={grunduebungAudio}
               onEnded={handleGrunduebungAudioEnded}
             />
-            
+
             <DrawingCanvas />
           </PageWrapper>
         );
@@ -615,9 +615,9 @@ function App() {
                 padding: '40px',
                 height: '100%'
               }}>
-                <img 
-                  src={traditionalImg} 
-                  alt="Traditional" 
+                <img
+                  src={traditionalImg}
+                  alt="Traditional"
                   style={{
                     maxWidth: '45%',
                     maxHeight: '80vh',
@@ -626,9 +626,9 @@ function App() {
                     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
                   }}
                 />
-                <img 
-                  src={modernImg} 
-                  alt="Modern" 
+                <img
+                  src={modernImg}
+                  alt="Modern"
                   style={{
                     maxWidth: '45%',
                     maxHeight: '80vh',
@@ -641,7 +641,7 @@ function App() {
             </PageWrapper>
           );
         }
-        
+
         // Popup-Texte für jedes Bild in Moderne Kalligrafie
         const getModernePopupText = (imageNumber) => {
           const popupTexts = {
@@ -660,7 +660,7 @@ function App() {
           };
           return popupTexts[imageNumber] || 'Platzhalter';
         };
-        
+
         // Default: Moderne Kalligrafie
         return (
           <PageWrapper
