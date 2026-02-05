@@ -63,8 +63,7 @@ import SchreibuebungArabisch from './assets/Images/SchreibuebungArabisch.PNG';
 import SchreibuebungChinesisch from './assets/Images/Schreibübung_chinesisch.svg';
 
 // Bilder für Der Kalligraf Seite
-import modernImg from './assets/Images/modern.png';
-import traditionalImg from './assets/Images/traditional.png';
+import kalligrafImg from './assets/Images/Kalligraf.png';
 
 const moderneKalligrafieItems = [
   { image: quoteImg, text: 'text' },
@@ -708,26 +707,14 @@ function App() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                gap: '40px',
                 padding: '40px',
                 height: '100%'
               }}>
                 <img
-                  src={traditionalImg}
-                  alt="Traditional"
+                  src={kalligrafImg}
+                  alt="Der Kalligraf"
                   style={{
-                    maxWidth: '45%',
-                    maxHeight: '80vh',
-                    objectFit: 'contain',
-                    borderRadius: '10px',
-                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
-                  }}
-                />
-                <img
-                  src={modernImg}
-                  alt="Modern"
-                  style={{
-                    maxWidth: '45%',
+                    maxWidth: '90%',
                     maxHeight: '80vh',
                     objectFit: 'contain',
                     borderRadius: '10px',
