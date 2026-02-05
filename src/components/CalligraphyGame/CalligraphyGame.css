@@ -38,8 +38,8 @@
 .game-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 30px;
-    max-width: 1200px;
+    gap: 20px;
+    max-width: 900px;
     width: 100%;
     margin-bottom: 60px;
     padding: 20px;
@@ -249,6 +249,56 @@
         grid-template-columns: repeat(4, 1fr);
         gap: 25px;
     }
+}
+
+/* Result Popup */
+.result-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.result-popup {
+    background: #F9EBD5;
+    border-radius: 12px;
+    padding: 40px 60px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    min-width: 300px;
+}
+
+.result-title {
+    font-family: 'Sedan', serif;
+    font-size: 2em;
+    color: #61554B;
+    margin: 0 0 30px 0;
+    font-weight: 600;
+}
+
+.try-again-button {
+    font-family: 'Sedan', serif;
+    font-size: 1.2em;
+    color: #F9EBD5;
+    background: #61554B;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.try-again-button:hover {
+    background: #4a3f37;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 900px) {

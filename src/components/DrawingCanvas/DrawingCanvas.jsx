@@ -279,9 +279,9 @@ const DrawingCanvas = () => {
         <div className="drawing-canvas-wrapper">
             {/* Anleitung Text */}
             <p className="drawing-instruction">
-                Nehme den Stift in die Hand und fahre die Grundstriche nach
+                Pick up the pen and trace the basic strokes 
                 <br />
-                um mit dem schreiben vertraut zu werden.
+                to familiarize yourself with writing.
             </p>
 
             {/* Canvas Container */}

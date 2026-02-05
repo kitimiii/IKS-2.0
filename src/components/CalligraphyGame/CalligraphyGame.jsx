@@ -1,14 +1,24 @@
 import { useState, useEffect } from 'react';
 import './CalligraphyGame.css';
 
-// Import game images
-import arabicYes from '../../assets/game-image/arabic.yes.png';
-import kalliNot from '../../assets/game-image/kalli.not.png';
+// Import game images - Traditional Calligraphy (correct answers)
+import abcTraditional from '../../assets/Images/abcTraditional.jpg';
+import arabCalligraphy from '../../assets/Images/arab_calligraphy.jpg';
+import chineseCalligraphy from '../../assets/Images/chineseCalligraphy.jpg';
+import modernCalligraphy from '../../assets/Images/modern_Calligraphy.jpg';
+
+// Import game images - Not traditional calligraphy (incorrect answers)
+import handlettering from '../../assets/Images/Handlettering.jpg';
+import handlettering2 from '../../assets/Images/Handlettering2.jpg';
+import handlettering3 from '../../assets/Images/Handlettering3.jpg';
+import typografie from '../../assets/Images/Typografie.avif';
+import typografie2 from '../../assets/Images/Typografie2.png';
+import typografie3 from '../../assets/Images/Typografie3.jpg';
 
 const CalligraphyGame = ({
     // Customizable props
-    instructionText = "Markiere alle Wörter die man zur Kalligraphie unterordnet",
-    requiredSelections = 7,
+    instructionText = "Mark all 4 words that belong to the topic calligraphy.",
+    requiredSelections = 4,
     submitButtonPosition = { left: '50%', transform: 'translateX(-50%)' }, // Veränderbar
     correctOpacity = 0.3, // Transparenz für richtige Antworten
     incorrectOpacity = 0.3, // Transparenz für falsche Antworten
@@ -19,19 +29,20 @@ const CalligraphyGame = ({
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [showWarning, setShowWarning] = useState(false);
     const [hoveredInfoId, setHoveredInfoId] = useState(null);
+    const [showResultPopup, setShowResultPopup] = useState(false);
 
-    // Game items - 5x arabic.yes (correct) and 5x kalli.not (incorrect)
+    // Game items - 4 traditional calligraphy (correct) and 6 modern/typography (incorrect)
     const gameItems = [
-        { id: 1, image: arabicYes, isCorrect: true },
-        { id: 2, image: kalliNot, isCorrect: false },
-        { id: 3, image: arabicYes, isCorrect: true },
-        { id: 4, image: kalliNot, isCorrect: false },
-        { id: 5, image: arabicYes, isCorrect: true },
-        { id: 6, image: kalliNot, isCorrect: false },
-        { id: 7, image: arabicYes, isCorrect: true },
-        { id: 8, image: kalliNot, isCorrect: false },
-        { id: 9, image: arabicYes, isCorrect: true },
-        { id: 10, image: kalliNot, isCorrect: false },
+        { id: 1, image: abcTraditional, isCorrect: true },
+        { id: 2, image: handlettering, isCorrect: false },
+        { id: 3, image: arabCalligraphy, isCorrect: true },
+        { id: 4, image: typografie, isCorrect: false },
+        { id: 5, image: chineseCalligraphy, isCorrect: true },
+        { id: 6, image: handlettering2, isCorrect: false },
+        { id: 7, image: modernCalligraphy, isCorrect: true },
+        { id: 8, image: typografie2, isCorrect: false },
+        { id: 9, image: handlettering3, isCorrect: false },
+        { id: 10, image: typografie3, isCorrect: false },
     ];
 
     const handleItemClick = (id) => {
@@ -49,13 +60,26 @@ const CalligraphyGame = ({
     };
 
     const handleSubmit = () => {
-        if (selectedItems.length < requiredSelections) {
-            // Zeige Warnung
+        if (selectedItems.length < 1) {
+            // Zeige Warnung wenn nichts ausgewählt
             setShowWarning(true);
             return;
         }
         setIsSubmitted(true);
+        setShowResultPopup(true);
     };
+
+    const handleTryAgain = () => {
+        setSelectedItems([]);
+        setIsSubmitted(false);
+        setShowResultPopup(false);
+    };
+
+    // Berechne die Anzahl der richtigen Antworten
+    const correctAnswersCount = selectedItems.filter(id => {
+        const item = gameItems.find(item => item.id === id);
+        return item && item.isCorrect;
+    }).length;
 
     // Auto-hide warning after delay
     useEffect(() => {
@@ -77,19 +101,12 @@ const CalligraphyGame = ({
         }
     }, [hoveredInfoId, infoTooltipDelay]);
 
-    const isButtonActive = selectedItems.length === requiredSelections;
+    const isButtonActive = selectedItems.length >= 1;
 
     return (
         <div className="calligraphy-game">
             {/* Instruction Text */}
             <h2 className="game-instruction">{instructionText}</h2>
-
-            {/* Counter Box */}
-            <div className="counter-box">
-                <span className="counter-text">
-                    {selectedItems.length}/{requiredSelections}
-                </span>
-            </div>
 
             {/* Game Grid */}
             <div className="game-grid">
@@ -172,6 +189,18 @@ const CalligraphyGame = ({
                     Submit
                 </button>
             </div>
+
+            {/* Result Popup */}
+            {showResultPopup && (
+                <div className="result-popup-overlay" onClick={() => setShowResultPopup(false)}>
+                    <div className="result-popup" onClick={(e) => e.stopPropagation()}>
+                        <h2 className="result-title">{correctAnswersCount}/4 richtig</h2>
+                        <button className="try-again-button" onClick={handleTryAgain}>
+                            Try Again
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

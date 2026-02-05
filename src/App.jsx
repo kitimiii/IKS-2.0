@@ -145,7 +145,7 @@ function App() {
     }
 
     // Feather quill theory page
-    if (activeItem === 'Federkiel' && activeSubItem !== 'practice' && federkielAudioRef.current) {
+    if (activeItem === 'Feather quill' && activeSubItem !== 'practice' && federkielAudioRef.current) {
       federkielAudioRef.current.play().catch(error => {
         console.log('Auto-play prevented by browser:', error);
       });
@@ -154,7 +154,7 @@ function App() {
       federkielAudioRef.current.currentTime = 0;
     }
 
-    // Federkiel practice page
+    // Feather quill practice page
     if (activeItem === 'Federkiel' && activeSubItem === 'practice' && federkiel2AudioRef.current) {
       federkiel2AudioRef.current.play().catch(error => {
         console.log('Auto-play prevented by browser:', error);
@@ -233,7 +233,7 @@ function App() {
     setSelectedModerneImage(null);
 
     // For Federkiel, Qalam , Maobi - automatically navigate to Theory sub-page
-    if (label === 'Federkiel' || label === 'Qalam ' || label === 'Maobi') {
+    if (label === 'Feather quill' || label === 'Qalam ' || label === 'Maobi') {
       setActiveItem(label);
       setActiveSubItem('theory');
       console.log(`Navigiere direkt zu: ${label} Theory`);
