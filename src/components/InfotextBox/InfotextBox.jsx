@@ -14,7 +14,8 @@ export const InfotextBox = ({
     infoContent = null,
     // Customizable dimensions - can be changed later
     height = 400,
-    width = null // If null, uses default CSS width
+    width = null, // If null, uses default CSS width
+    backgroundImage = null // Optional background image
 }) => {
     const [open, setOpen] = useState(false);
     const panelRef = useRef(null);
@@ -173,6 +174,12 @@ export const InfotextBox = ({
                 ref={panelRef}
                 className="infotextbox-panel"
                 aria-hidden={!open}
+                style={backgroundImage ? {
+                    backgroundImage: `url(${backgroundImage})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat'
+                } : {}}
             >
                 <div className="itb-panel-inner">
                     <div className="itb-text-content">
