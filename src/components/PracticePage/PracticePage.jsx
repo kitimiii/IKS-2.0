@@ -161,11 +161,11 @@ const PracticePage = ({
             const angle = Math.atan2(dy, dx);
 
             // Für Feather quill: 30° Rotation wie bei einem echten Feather quill
-            if (title === 'Feather quill') {
-                // Feather quill wird in 30° Winkel gehalten
+            if (title === 'Federkiel') {
+                // Federkiel wird in 30° Winkel gehalten
                 const penAngle = -30 * Math.PI / 180; // 30° in Radiant
 
-                // Berechne den Winkel relativ zur Feather quill-Orientierung
+                // Berechne den Winkel relativ zur Federkiel-Orientierung
                 // Die dicksten Striche entstehen senkrecht zur Schnittfläche (bei 30° + 90° = 120°)
                 // Die dünnsten parallel zur Schnittfläche (bei 30°)
                 const relativeAngle = angle - penAngle;
