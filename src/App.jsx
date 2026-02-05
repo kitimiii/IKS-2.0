@@ -503,11 +503,12 @@ function App() {
             }
             isVisible={activeItem === 'Federkiel' && activeSubItem !== 'practice'}
             // 3D Model settings
-            modelPath="/models/Stift_platzhalter/scene.gltf"
+            modelPath="/models/Featherquill_3D/scene.gltf"
             modelContainerWidth={400}
             modelContainerHeight={400}
             baseRotation={[0, 0, 0]}
             autoRotateSpeed={0.35}
+            modelScale={0.4}
             // InfotextBox settings 
             infoBoxHeight={400}
           />

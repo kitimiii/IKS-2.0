@@ -1,0 +1,11 @@
+Model Information:
+* title:	Federkiel
+* source:	https://sketchfab.com/3d-models/federkiel-7c3dd57f66ab41af873a1cca082477ac
+* author:	Kitimii (https://sketchfab.com/Mikiti)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Federkiel" (https://sketchfab.com/3d-models/federkiel-7c3dd57f66ab41af873a1cca082477ac) by Kitimii (https://sketchfab.com/Mikiti) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -17,6 +17,7 @@ const TheoryPage = ({
     modelContainerHeight = 400,
     baseRotation = [0, 0, 0],
     autoRotateSpeed = 0.35,
+    modelScale = 1,
     // InfotextBox settings - all customizable
     infoBoxHeight = 400,
     infoBoxWidth = null,
@@ -56,6 +57,7 @@ const TheoryPage = ({
                         containerHeight={modelContainerHeight}
                         baseRotation={baseRotation}
                         autoRotateSpeed={autoRotateSpeed}
+                        modelScale={modelScale}
                     />
                 </div>
 
