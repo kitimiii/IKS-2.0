@@ -9,11 +9,10 @@ const HeroPage = ({ onPlayClick }) => {
             {/* Content */}
             <div className="hero-content">
                 <h1 className="hero-title">
-                    DIE KUNST DES<br />SCHÖNSCHREIBENS
+                    THE ART OF<br />BEAUTIFUL WRITING
                 </h1>
                 <p className="hero-subheader">
-                    Zieh die Kopfhörer an und starte das Audio,<br />
-                    um in die Kalligraphie einzutauchen.
+                    Put on your headphones and start the audio to dive into calligraphy.
                 </p>
 
                 {/* Play Button */}
