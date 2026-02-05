@@ -9,7 +9,8 @@ function Model({
     modelPath,
     baseRotation = [0, 0, 0],
     autoRotateSpeed = 0.35,
-    isInteracting
+    isInteracting,
+    modelScale = 1
 }) {
     const groupRef = useRef();
     const { scene } = useGLTF(modelPath);
@@ -27,7 +28,7 @@ function Model({
     return (
         <group ref={groupRef} rotation={baseRotation}>
             <Center>
-                <primitive object={clonedScene} />
+                <primitive object={clonedScene} scale={modelScale} />
             </Center>
         </group>
     );
@@ -56,6 +57,8 @@ export const Model3DViewer = ({
     cameraPosition = [0, 0, 5],
     // Background color (transparent by default)
     backgroundColor = 'transparent',
+    // Model scale - customizable
+    modelScale = 1,
     className = ''
 }) => {
     const isInteracting = useRef(false);
@@ -87,6 +90,7 @@ export const Model3DViewer = ({
                         baseRotation={baseRotation}
                         autoRotateSpeed={autoRotateSpeed}
                         isInteracting={isInteracting}
+                        modelScale={modelScale}
                     />
                 </Suspense>
 
