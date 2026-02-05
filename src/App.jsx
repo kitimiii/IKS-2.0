@@ -335,7 +335,7 @@ function App() {
             7: 'Platzhalter 7',
             8: 'Platzhalter 8',
             9: 'Platzhalter 9',
-            10: 'Platzhalter 10',
+            10: 'Über den goldenen Feldern ziehen die Wolken dahin; zwischen den Blumen weht der Wind des Herbstes. Japanische Kalligrafie Foto von https://unsplash.com/de',
             11: 'Platzhalter 11',
             12: 'Platzhalter 12'
           };
@@ -436,7 +436,7 @@ function App() {
 
                   <p style={{
                     fontFamily: 'Sedan, serif',
-                    fontSize: '1em',
+                    fontSize: '0.7em',
                     color: '#61554B',
                     textAlign: 'center',
                     margin: 0
@@ -545,11 +545,12 @@ function App() {
             }
             isVisible={activeItem === 'Qalam ' && activeSubItem !== 'practice'}
             // 3D Model settings
-            modelPath="/models/Stift_platzhalter/scene.gltf"
+            modelPath="/models/Qalam_3D/scene.gltf"
             modelContainerWidth={500}
             modelContainerHeight={500}
             baseRotation={[0, 0, 0]}
             autoRotateSpeed={0.35}
+            modelScale={0.09}
             // InfotextBox settings
             infoBoxHeight={500}
             infoBoxWidth={800}

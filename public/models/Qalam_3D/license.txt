@@ -1,0 +1,11 @@
+Model Information:
+* title:	Qalam_
+* source:	https://sketchfab.com/3d-models/qalam-9dd2c59896064d1e99d057fffa6d756f
+* author:	Kitimii (https://sketchfab.com/Mikiti)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Qalam_" (https://sketchfab.com/3d-models/qalam-9dd2c59896064d1e99d057fffa6d756f) by Kitimii (https://sketchfab.com/Mikiti) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
