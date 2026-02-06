@@ -394,14 +394,14 @@ function App() {
         // Popup-Texte für jedes Bild
         const getPopupText = (imageNumber) => {
           const popupTexts = {
-            1: 'Platzhalter 1',
-            2: 'Platzhalter 2',
-            3: 'Platzhalter 3',
+            1: 'This script is from the Qurʾān: "... the vicinity of Al-Aqsa (mosque), which We have blessed,to show him some of Our signs.He is truly the All-Hearing, the All-Seeing.And We gave Moses the Scripture ..."',
+            2: 'The script belongs to the German Kurrent/Sütterlin tradition, i.e., the historical cursive scripts used in German-speaking countries. German script as it was written in the 18th–20th centuries',
+            3: 'The image shows an artistically designed Bible page, more precisely an illuminated manuscript with a passage from the Gospel according to Matthew',
             4: 'Platzhalter 4',
-            5: 'Platzhalter 5',
-            6: 'Platzhalter 6',
-            7: 'Platzhalter 7',
-            8: 'Platzhalter 8',
+            5: 'Example of early 19th-century document culture. This is an official confirmation of a baptismal entry, presumably for legal purposes',
+            6: 'Classical Chinese narrative and theatrical literature. In the Wu family garden, a simple oil merchant wins the heart of the famous courtesan.',
+            7: 'This is not handwriting, but Fraktur typeface – one of the classic German printed fonts that was widely used until the 20th century.',
+            8: 'Stil einer klassischen englischen Schreibschrift',
             9: 'Passage from the Quran Say: Intercession belongs to God alone. His is the dominion of the heavens and the earth, and to Him you will be returned. Arabic calligraphy',
             10: 'Clouds drift across the golden fields; the autumn wind blows among the flowers. Japanese calligraphy',
             11: 'Platzhalter 11',

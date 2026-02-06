@@ -14,7 +14,7 @@ import schreiben from '../../assets/slider-image/schreiben.jpg';
 import schrift from '../../assets/slider-image/schrift.jpg';
 import tisch from '../../assets/slider-image/arabisch.jpg';
 import wand from '../../assets/slider-image/japanisch.jpg';
-import werkzeug from '../../assets/slider-image/werkzeug (1).jpg';
+import werkzeug from '../../assets/slider-image/werkzeug.png';
 import zitat from '../../assets/slider-image/zitat (1).jpg';
 
 function debounce(func, wait) {
