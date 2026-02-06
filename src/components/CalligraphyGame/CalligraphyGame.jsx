@@ -33,15 +33,15 @@ const CalligraphyGame = ({
     // Game items - 4 traditional calligraphy (correct) and 6 modern/typography (incorrect)
     const gameItems = [
         { id: 1, image: abcTraditional, isCorrect: true },
-        { id: 2, image: handlettering, isCorrect: false, tooltip: "Hierbei handelt es sich um Handlettering, eine moderne Kunstform, welche nicht zur traditionellen Kalligraphie gehört." },
+        { id: 2, image: handlettering, isCorrect: false, tooltip: "This is hand lettering, a modern art form that is not part of traditional calligraphy." },
         { id: 3, image: arabCalligraphy, isCorrect: true },
-        { id: 4, image: typografie, isCorrect: false, tooltip: "Hierbei handelt es sich um Typografie, die sich auf gedruckte oder digitale Schrift bezieht." },
+        { id: 4, image: typografie, isCorrect: false, tooltip: "This refers to typography relating to printed or digital fonts." },
         { id: 5, image: chineseCalligraphy, isCorrect: true },
-        { id: 6, image: handlettering2, isCorrect: false, tooltip: "Dies ist modernes Handlettering, eine zeitgenössische Schriftkunst, aber keine traditionelle Kalligraphie." },
+        { id: 6, image: handlettering2, isCorrect: false, tooltip: "This is modern hand lettering, a contemporary art of writing, but not traditional calligraphy." },
         { id: 7, image: modernCalligraphy, isCorrect: true },
-        { id: 8, image: typografie2, isCorrect: false, tooltip: "Hierbei handelt es sich um Typografische Schriften, die für den Druck konzipiert sind und sich von der handgeschriebenen Kalligraphie unterscheiden." },
-        { id: 9, image: handlettering3, isCorrect: false, tooltip: "Dies ist Handlettering, eine dekorative Schriftgestaltung, aber keine klassische Kalligraphie." },
-        { id: 10, image: typografie3, isCorrect: false, tooltip: "Diese digitale Typografie gehört nicht zur traditionellen, handgeschriebenen Kalligraphie." },
+        { id: 8, image: typografie2, isCorrect: false, tooltip: "These are typographic fonts designed for printing and differ from handwritten calligraphy." },
+        { id: 9, image: handlettering3, isCorrect: false, tooltip: "This is hand lettering, a decorative form of writing, but not classical calligraphy." },
+        { id: 10, image: typografie3, isCorrect: false, tooltip: "This digital typography is not part of traditional, handwritten calligraphy." },
     ];
 
     const handleItemClick = (id) => {
